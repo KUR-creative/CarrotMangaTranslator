@@ -42062,6 +42062,28 @@
         "pct": 80
       }
     },
+    "src/renderer/src/components/settingsModal/GemmaSamplingFields.tsx": {
+      "lines": {
+        "covered": 9,
+        "total": 9,
+        "pct": 100
+      },
+      "statements": {
+        "covered": 10,
+        "total": 10,
+        "pct": 100
+      },
+      "functions": {
+        "covered": 5,
+        "total": 5,
+        "pct": 100
+      },
+      "branches": {
+        "covered": 0,
+        "total": 0,
+        "pct": 100
+      }
+    },
     "src/renderer/src/components/settingsModal/GemmaVramWarning.tsx": {
       "lines": {
         "total": 5,
@@ -46966,6 +46988,28 @@
         "covered": 82,
         "total": 107,
         "pct": 76.63
+      }
+    },
+    "src/shared/gemmaSamplingSettings.ts": {
+      "lines": {
+        "covered": 1,
+        "total": 1,
+        "pct": 100
+      },
+      "statements": {
+        "covered": 1,
+        "total": 1,
+        "pct": 100
+      },
+      "functions": {
+        "covered": 0,
+        "total": 0,
+        "pct": 100
+      },
+      "branches": {
+        "covered": 0,
+        "total": 0,
+        "pct": 100
       }
     },
     "src/shared/generatedGlyphReview.ts": {

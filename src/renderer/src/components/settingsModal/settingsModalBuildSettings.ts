@@ -65,6 +65,7 @@ export function buildSettingsFromDraft({
     localModelPath: draft.trimmedLocalModelPath,
     localMmprojPath: draft.trimmedLocalMmprojPath,
     vramMode: draft.selectedVramMode,
+    gemmaSampling: values.gemmaSampling,
     fitTargetMb: values.gemmaFitTargetMb,
     mmprojOffload: values.gemmaMmprojOffload,
     llamaRuntimeProfile: values.llamaRuntimeProfile,

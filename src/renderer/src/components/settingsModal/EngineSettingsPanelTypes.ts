@@ -1,3 +1,4 @@
+import type { GemmaSamplingSettings } from "../../../../shared/gemmaSamplingSettings";
 import type { AppSettings } from "../../../../shared/settingsTypes";
 import type { CodexImageGenerationModel } from "../../../../shared/codexSettings";
 import type React from "react";
@@ -63,6 +64,8 @@ export type EngineSettingsPanelProps = {
   gpuMemoryMb: number | null;
   customModelFile: string;
   customModelRepo: string;
+  gemmaSampling: GemmaSamplingSettings;
+  setGemmaSampling: React.Dispatch<React.SetStateAction<GemmaSamplingSettings>>;
   gemmaFitTargetMb: number;
   gemmaMmprojOffload: boolean;
   isLlamaRuntimeOptionDisabled: (profile: LlamaRuntimeProfile) => boolean;

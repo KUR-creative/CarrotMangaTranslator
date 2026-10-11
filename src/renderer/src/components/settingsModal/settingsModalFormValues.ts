@@ -1,3 +1,7 @@
+import {
+  DEFAULT_GEMMA_SAMPLING,
+  type GemmaSamplingSettings,
+} from "../../../../shared/gemmaSamplingSettings";
 import type { CodexImageGenerationModel } from "../../../../shared/codexSettings";
 import type {
   ApiReasoningEffort,
@@ -63,6 +67,7 @@ export type SettingsFormValues = {
   localModelPath: string;
   localMmprojPath: string;
   customVramMode: GemmaVramMode;
+  gemmaSampling: GemmaSamplingSettings;
   gemmaFitTargetMb: number;
   gemmaMmprojOffload: boolean;
   llamaRuntimeProfile: LlamaRuntimeProfile;
@@ -223,6 +228,7 @@ function resolveModelFormValues(
   | "localModelPath"
   | "localMmprojPath"
   | "customVramMode"
+  | "gemmaSampling"
   | "gemmaFitTargetMb"
   | "gemmaMmprojOffload"
   | "llamaRuntimeProfile"
@@ -247,6 +253,12 @@ function resolveModelFormValues(
     localModelPath: settings.gemma.localModelPath ?? "",
     localMmprojPath: settings.gemma.localMmprojPath ?? "",
     customVramMode: settings.gemma.vramMode,
+    gemmaSampling: {
+      temperature:
+        settings.gemma.temperature ?? DEFAULT_GEMMA_SAMPLING.temperature,
+      topP: settings.gemma.topP ?? DEFAULT_GEMMA_SAMPLING.topP,
+      topK: settings.gemma.topK ?? DEFAULT_GEMMA_SAMPLING.topK,
+    },
     gemmaFitTargetMb: settings.gemma.fitTargetMb ?? 512,
     gemmaMmprojOffload: settings.gemma.mmprojOffload ?? true,
     llamaRuntimeProfile: settings.gemma.llamaRuntimeProfile ?? "cuda12",

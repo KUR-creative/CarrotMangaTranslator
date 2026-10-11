@@ -13,7 +13,7 @@
     "src/main/pipeline/pageResultBuilder.ts": 18,
     "src/main/runtime/ocr/managed-python.cjs": 13,
     "src/main/runtime/transport/llama-server-process.cjs": 18,
-    "src/main/settings/appSettingsDefaults.ts": 13,
+    "src/main/settings/appSettingsDefaults.ts": 14,
     "src/main/settings/appSettingsNormalize.ts": 15,
     "src/main/wholePagePipeline.ts": 22,
     "src/main/workContextAnalysis.ts": 16,

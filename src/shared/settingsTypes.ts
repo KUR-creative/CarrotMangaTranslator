@@ -85,6 +85,9 @@ type GemmaSettings = {
   mmprojFile?: string;
   localModelPath?: string;
   localMmprojPath?: string;
+  temperature?: number;
+  topP?: number;
+  topK?: number;
   vramMode: GemmaVramMode;
   /** VRAM llama.cpp's automatic GPU fitting should leave available. */
   fitTargetMb?: number;

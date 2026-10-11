@@ -551,7 +551,8 @@ describe("production cleanup coverage floor gate", () => {
     // Includes global chat, shared actions, OpenCode help, MCP event streams, shared
     // translation instructions and image budget; inherited floors remain unchanged.
     // inherited floors remain unchanged.
-    expect(scope.added).toHaveLength(1446);
+    // Gemma sampling adds a production control and its shared default contract.
+    expect(scope.added).toHaveLength(1448);
     expect(scope.deleted).toHaveLength(12);
   });
 });

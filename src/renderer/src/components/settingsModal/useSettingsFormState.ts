@@ -98,14 +98,7 @@ function useSettingsFormSetters(
       setLocalModelPath: createFormFieldDispatch(setValues, "localModelPath"),
       setLocalMmprojPath: createFormFieldDispatch(setValues, "localMmprojPath"),
       setCustomVramMode: createFormFieldDispatch(setValues, "customVramMode"),
-      setGemmaFitTargetMb: createFormFieldDispatch(
-        setValues,
-        "gemmaFitTargetMb",
-      ),
-      setGemmaMmprojOffload: createFormFieldDispatch(
-        setValues,
-        "gemmaMmprojOffload",
-      ),
+      ...createGemmaFormSetters(setValues),
       setLlamaRuntimeProfile: createFormFieldDispatch(
         setValues,
         "llamaRuntimeProfile",
@@ -157,6 +150,19 @@ function useSettingsFormSetters(
     }),
     [setValues],
   );
+}
+
+function createGemmaFormSetters(
+  setValues: React.Dispatch<React.SetStateAction<SettingsFormValues>>,
+) {
+  return {
+    setGemmaSampling: createFormFieldDispatch(setValues, "gemmaSampling"),
+    setGemmaFitTargetMb: createFormFieldDispatch(setValues, "gemmaFitTargetMb"),
+    setGemmaMmprojOffload: createFormFieldDispatch(
+      setValues,
+      "gemmaMmprojOffload",
+    ),
+  };
 }
 
 function createResearchFormSetters(

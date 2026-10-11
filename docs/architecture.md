@@ -1,5 +1,16 @@
 # 코드 경계와 품질 규칙
 
+## 2026-10-12 Gemma 생성 설정
+
+Gemma Temperature·Top P·Top K의 기본값은 shared `gemmaSamplingSettings`가 소유한다.
+설정 기본값·저장값 정규화·런타임 fallback·렌더러 초기화와 복원이 같은 계약을 직접
+사용하므로 `appSettingsDefaults`의 직접 import 상한만 13에서 14로 조정한다.
+기본값 복제나 재수출 우회는 만들지 않는다. 저장/IPC/환경변수 우선순위와 실제 요청의
+샘플링 전달, grouping의 Temperature 0 및 추론 비활성화는 행동 테스트로 검증한다.
+새 UI·공용 기본값 파일의 Windows 커버리지 기준은 기존 기준을 유지한 채 추가했다.
+측정 출처는 `.tmp/gemma-sampling-coverage-20261012.json`이며 SHA-256은
+`96a8397ca5881f7d50e1ff27c9533fc68f0be02cf7a28e8cf1d140fb66629a3c`다.
+
 ## 2026-10-03 반복 초기화 제거
 
 모델·숨은 렌더러 재사용은 native 작업/단계의 명시적 workload 안으로 한정한다.

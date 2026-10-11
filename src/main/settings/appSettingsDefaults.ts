@@ -1,3 +1,4 @@
+import { DEFAULT_GEMMA_SAMPLING } from "../../shared/gemmaSamplingSettings";
 import {
   DEFAULT_CODEX_MODEL,
   DEFAULT_CODEX_REASONING_EFFORT,
@@ -157,6 +158,7 @@ function resolveDefaultGemmaSettings(
       defaultGemmaPreset.mmprojFile,
     vramMode,
     ...memoryDefaults,
+    ...DEFAULT_GEMMA_SAMPLING,
     llamaRuntimeProfile,
     ...(llamaRocmTarget ? { llamaRocmTarget } : {}),
     ...(resolveUnsafeUnifiedMemoryOverride(

@@ -1,3 +1,4 @@
+import type { GemmaSamplingSettings } from "../../../shared/gemmaSamplingSettings";
 import type { CodexImageGenerationModel } from "../../../shared/codexSettings";
 import type {
   AppSettings,
@@ -53,6 +54,7 @@ type BuildSettingsFromFormInput = {
   localModelPath: string;
   localMmprojPath: string;
   vramMode: GemmaVramMode;
+  gemmaSampling: GemmaSamplingSettings;
   fitTargetMb: number;
   mmprojOffload: boolean;
   llamaRuntimeProfile: LlamaRuntimeProfile;
@@ -211,6 +213,7 @@ function buildGemmaSettings(input: BuildSettingsFromFormInput) {
       ? { localMmprojPath: input.localMmprojPath }
       : {}),
     vramMode: input.vramMode,
+    ...input.gemmaSampling,
     fitTargetMb: input.fitTargetMb,
     mmprojOffload: input.mmprojOffload,
     llamaRuntimeProfile: input.llamaRuntimeProfile,

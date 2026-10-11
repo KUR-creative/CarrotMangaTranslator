@@ -2036,6 +2036,14 @@
         "mmprojFile": "mmproj file",
         "mmprojPlaceholder": "Detected automatically in the same folder, or choose manually",
         "mmprojDescription": "The app searches the model folder for mmproj automatically; choose it manually if it is not found."
+      },
+      "sampling": {
+        "title": "Translation generation",
+        "description": "Applies to translation generation. Bubble grouping keeps its fixed settings. Environment variables take precedence when configured.",
+        "temperature": "Lower values favor more likely wording. Higher values increase variation, but do not guarantee more accurate translation.",
+        "topP": "Limits candidate tokens by cumulative probability. Start with the default of 0.95.",
+        "topK": "Limits candidates to the K most likely tokens. Start with the default of 64.",
+        "reset": "Restore defaults"
       }
     },
     "codex": {
