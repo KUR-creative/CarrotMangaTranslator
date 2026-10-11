@@ -1,4 +1,5 @@
 import { throwSoundEffectPhaseErrors } from "../src/main/jobs/soundEffectTranslationResult";
+import { resolveDefaultAppSettings } from "../src/main/appSettings";
 import { writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { afterEach, describe, expect, it, vi } from "vitest";
@@ -882,7 +883,14 @@ describe("dedicated sound-effect translation contract", () => {
       ],
       typographySegmentation,
     }));
-    const release = vi.fn();
+    const release = vi.fn(async () => {});
+    const preparePages = vi.fn(async (pages: readonly MangaPage[]) => {
+      expect(pages.map((input) => input.id)).toEqual([page.id]);
+      expect(runPage).not.toHaveBeenCalled();
+    });
+    const dispose = vi.fn(async () => {
+      expect(release).toHaveBeenCalledOnce();
+    });
     const updatePages = vi.fn(
       async (_chapterId: string, _pages: MangaPage[]) => chapter,
     );
@@ -903,10 +911,18 @@ describe("dedicated sound-effect translation contract", () => {
       new AbortController().signal,
       {
         getAppPaths: () => ({}) as never,
-        getAppSettings: async () => ({ inpainting: {} }) as never,
-        acquireEngine: async () =>
-          ({ engine: { model: "flux-klein" }, release }) as never,
-        createBubbleLayoutRunner: () => ({ runPage }),
+        getAppSettings: async () => ({
+          ...resolveDefaultAppSettings(),
+          inpainting: {
+            ...resolveDefaultAppSettings().inpainting,
+            model: "flux-klein",
+          },
+        }),
+        acquireEngine: async () => {
+          expect(preparePages).toHaveBeenCalledOnce();
+          return { engine: { model: "flux-klein" }, release } as never;
+        },
+        createBubbleLayoutRunner: () => ({ runPage, preparePages, dispose }),
         openChapter: async () => chapter,
         inpaintPage,
         updatePages,
@@ -943,9 +959,10 @@ describe("dedicated sound-effect translation contract", () => {
     ]);
     expect(result).toEqual({ changedPageIds: [page.id], warnings: [] });
     expect(release).toHaveBeenCalledOnce();
+    expect(dispose).toHaveBeenCalledOnce();
   });
 
-  it.each(["flux-klein", "lama"])(
+  it.each(["flux-klein", "lama-manga"] as const)(
     "keeps a page without a prior completion receipt receipt-free with %s",
     async (model) => {
       const page = makePage();
@@ -969,7 +986,13 @@ describe("dedicated sound-effect translation contract", () => {
         new AbortController().signal,
         {
           getAppPaths: () => ({}) as never,
-          getAppSettings: async () => ({ inpainting: {} }) as never,
+          getAppSettings: async () => ({
+            ...resolveDefaultAppSettings(),
+            inpainting: {
+              ...resolveDefaultAppSettings().inpainting,
+              model: model,
+            },
+          }),
           acquireEngine: async () =>
             ({ engine: { model }, release: vi.fn() }) as never,
           createBubbleLayoutRunner,
@@ -1020,7 +1043,13 @@ describe("dedicated sound-effect translation contract", () => {
       new AbortController().signal,
       {
         getAppPaths: () => ({}) as never,
-        getAppSettings: async () => ({ inpainting: {} }) as never,
+        getAppSettings: async () => ({
+          ...resolveDefaultAppSettings(),
+          inpainting: {
+            ...resolveDefaultAppSettings().inpainting,
+            model: "flux-klein",
+          },
+        }),
         acquireEngine: async () =>
           ({ engine: { model: "flux-klein" }, release: vi.fn() }) as never,
         createBubbleLayoutRunner: () => ({
@@ -1055,7 +1084,13 @@ describe("dedicated sound-effect translation contract", () => {
       new AbortController().signal,
       {
         getAppPaths: () => ({}) as never,
-        getAppSettings: async () => ({ inpainting: {} }) as never,
+        getAppSettings: async () => ({
+          ...resolveDefaultAppSettings(),
+          inpainting: {
+            ...resolveDefaultAppSettings().inpainting,
+            model: "flux-klein",
+          },
+        }),
         acquireEngine: async () =>
           ({ engine: { model: "flux-klein" }, release: vi.fn() }) as never,
         createBubbleLayoutRunner: () => ({

@@ -60,6 +60,14 @@ export type BubbleLayoutRunnerResult = {
 
 /** Model/process boundary. Production adapters and tests can implement this port. */
 export interface BubbleLayoutRunner {
+  /** Analyze all originals and release detector GPU resources before inpainting. */
+  preparePages?(
+    pages: readonly MangaPage[],
+    signal: AbortSignal,
+    onProgress?: (page: MangaPage, index: number) => void,
+  ): Promise<void>;
+  /** Remove job-local prepared detections. */
+  dispose?(): Promise<void>;
   runPage(
     request: BubbleLayoutRunnerRequest,
   ): Promise<BubbleLayoutRunnerResult>;

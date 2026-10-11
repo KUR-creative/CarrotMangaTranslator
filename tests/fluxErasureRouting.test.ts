@@ -8,6 +8,7 @@ import { resolveDefaultAppSettings } from "../src/main/appSettings";
 import { createPageWorkflowPlan } from "../src/shared/pageWorkflowTypes";
 import type { PageWorkflowRuntimeContext } from "../src/main/pageWorkflow/pageWorkflowRuntimeTypes";
 import type { InpaintingEngine } from "../src/main/inpainting/inpaintingEngine";
+import type { BubbleLayoutRunner } from "../src/main/inpainting/bubbleLayoutRunner";
 import { makeRasterPng } from "./helpers/imageFixtures";
 
 vi.mock("electron", async () => ({
@@ -57,32 +58,60 @@ describe("FLUX erasure independent of final typesetting", () => {
         }),
         dispose: vi.fn(),
       };
+      const preparePages = vi.fn<
+        NonNullable<BubbleLayoutRunner["preparePages"]>
+      >(async (pages, _signal, onProgress) => {
+        pages.forEach((page, index) => onProgress?.(page, index));
+        await Promise.resolve();
+      });
+      const dispose = vi.fn(async () => {});
       const runtime = {
-        acquireInpaintingEngine: async () => ({ engine, release }),
+        acquireInpaintingEngine: async () => {
+          expect(preparePages).toHaveBeenCalledTimes(
+            model === "flux-klein" ? 1 : 0,
+          );
+          return { engine, release };
+        },
         acquireCodexInpaintingEngine: async () => {
           throw Error("Unexpected Codex acquisition");
         },
-        createProductionBubbleLayoutRunner: () => ({ runPage }),
+        createProductionBubbleLayoutRunner: () => ({
+          runPage,
+          preparePages,
+          dispose,
+        }),
       };
-      const context = {
-        paths: { dataRoot: root },
-        settings: resolveDefaultAppSettings(),
+      const settings = resolveDefaultAppSettings();
+      settings.inpainting = { ...settings.inpainting, model };
+      const context: Partial<PageWorkflowRuntimeContext> = {
+        paths: { dataRoot: root } as PageWorkflowRuntimeContext["paths"],
+        settings,
         signal: new AbortController().signal,
+        emit: vi.fn(),
         plan: {
           ...createPageWorkflowPlan(["erase"]),
           overwrite: ["erase"],
           bubbleLayout: false,
         },
-      } as PageWorkflowRuntimeContext;
-      const output = await createWorkflowImages(context, runtime).erase(page);
+      };
+      const images = createWorkflowImages(
+        context as PageWorkflowRuntimeContext,
+        runtime,
+      );
+      await images.prepare([page, { ...page, id: "page-2" }]);
+      const output = await images.erase(page);
+      await images.erase({ ...page, id: "page-2" });
+      await images.prepare([page]);
+      await images.dispose();
+      expect(dispose).toHaveBeenCalledOnce();
       expect(output.blocks).toEqual(before.blocks);
       expect(page).toEqual(before);
       expect(await readFile(page.imagePath)).toEqual(bytes);
       expect(output.inpaintedImagePath).toBeTruthy();
-      expect(engine.inpaint).toHaveBeenCalledOnce();
-      expect(release).toHaveBeenCalledOnce();
+      expect(engine.inpaint).toHaveBeenCalledTimes(2);
+      expect(release).toHaveBeenCalledTimes(2);
       if (model === "flux-klein")
-        expect(runPage).toHaveBeenCalledExactlyOnceWith(
+        expect(runPage).toHaveBeenCalledWith(
           expect.objectContaining({ sourceEraseMask: true, paddingRatio: 0 }),
         );
       else expect(runPage).not.toHaveBeenCalled();

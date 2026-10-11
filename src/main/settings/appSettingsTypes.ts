@@ -218,6 +218,7 @@ export type TranslationOptions = {
   ocrBatchCompletedBefore?: number;
   ocrBatchTotal?: number;
   onProgress?: (event: {
+    sentGeneration?: Record<string, number | boolean>;
     phase: JobPhase;
     progressText: string;
     detail?: string;

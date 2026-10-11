@@ -2592,6 +2592,28 @@
         "pct": 81.08
       }
     },
+    "src/main/jobs/inpaintingJobPageCompletion.ts": {
+      "lines": {
+        "covered": 52,
+        "total": 56,
+        "pct": 92.85
+      },
+      "statements": {
+        "covered": 57,
+        "total": 63,
+        "pct": 90.47
+      },
+      "functions": {
+        "covered": 19,
+        "total": 19,
+        "pct": 100
+      },
+      "branches": {
+        "covered": 86,
+        "total": 92,
+        "pct": 93.47
+      }
+    },
     "src/main/jobs/inpaintingJobPageProcessor.ts": {
       "lines": {
         "covered": 32,
@@ -7848,6 +7870,28 @@
         "covered": 33,
         "total": 39,
         "pct": 84.61
+      }
+    },
+    "src/main/runtime/transport/chat-completion.cjs": {
+      "lines": {
+        "covered": 23,
+        "total": 26,
+        "pct": 88.46
+      },
+      "statements": {
+        "covered": 23,
+        "total": 26,
+        "pct": 88.46
+      },
+      "functions": {
+        "covered": 3,
+        "total": 3,
+        "pct": 100
+      },
+      "branches": {
+        "covered": 7,
+        "total": 8,
+        "pct": 87.5
       }
     },
     "src/main/runtime/transport/download-budget-utils.cjs": {
@@ -21842,6 +21886,28 @@
         "total": 37,
         "covered": 26,
         "pct": 70.27
+      }
+    },
+    "src/main/bubbleLayout/preparedLayoutDetections.ts": {
+      "lines": {
+        "covered": 38,
+        "total": 38,
+        "pct": 100
+      },
+      "statements": {
+        "covered": 39,
+        "total": 39,
+        "pct": 100
+      },
+      "functions": {
+        "covered": 4,
+        "total": 4,
+        "pct": 100
+      },
+      "branches": {
+        "covered": 12,
+        "total": 12,
+        "pct": 100
       }
     },
     "src/main/bubbleLayout/wasmWorker.ts": {

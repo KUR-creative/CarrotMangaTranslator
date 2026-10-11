@@ -86,7 +86,7 @@ export function resolveGemmaGenerationOptions(
     temperature: readNumberEnv(
       runtimeEnv,
       "MANGA_TRANSLATOR_TEMPERATURE",
-      0.2,
+      0.1,
       { min: 0, max: 2 },
     ),
     topP: readNumberEnv(runtimeEnv, "MANGA_TRANSLATOR_TOP_P", 0.95, {

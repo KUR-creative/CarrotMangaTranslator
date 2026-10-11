@@ -183,7 +183,7 @@ describe("runtime launch argument contracts", () => {
     ).toEqual(["--image-max-tokens", "1024"]);
     expect(
       args.slice(args.indexOf("--temp"), args.indexOf("--temp") + 2),
-    ).toEqual(["--temp", "0.2"]);
+    ).toEqual(["--temp", "0.1"]);
     expect(
       args.slice(args.indexOf("--top-k"), args.indexOf("--top-k") + 2),
     ).toEqual(["--top-k", "64"]);

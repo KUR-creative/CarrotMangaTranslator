@@ -78,6 +78,20 @@ export async function prepareBubbleLayoutJob({
   };
 }
 
+export async function prepareBubbleLayoutPages(
+  prepared: PreparedBubbleLayoutJob,
+  request: StartInpaintingRequest,
+  pages: readonly MangaPage[],
+  signal: AbortSignal,
+  onProgress: (page: MangaPage, index: number) => void,
+): Promise<void> {
+  if (
+    prepared.appSettings &&
+    needsFluxMaskPrepass(request, prepared.appSettings)
+  )
+    await prepared.runner?.preparePages?.(pages, signal, onProgress);
+}
+
 function needsFluxMaskPrepass(
   request: StartInpaintingRequest,
   settings: AppSettings,

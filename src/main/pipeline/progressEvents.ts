@@ -4,6 +4,7 @@ import { tMain } from "./localization";
 import type { ModelEndpointHandle, PipelineOptions } from "./types";
 import type { OcrPipeline } from "../../shared/settingsTypes";
 import { isHayaiOcrPipeline } from "../../shared/ocrEngines";
+import { logPipelineInfo } from "./pipelineLogger";
 
 type Emit = PipelineOptions["emit"];
 
@@ -91,6 +92,14 @@ export function attachPageProgress(
   maxAttempts: number,
 ): void {
   pageOptions.onProgress = (progress) => {
+    if (progress.sentGeneration) {
+      logPipelineInfo("Model request generation settings", {
+        jobId: context.jobId,
+        pageIndex: pageIndex + 1,
+        attempt,
+        sentGeneration: progress.sentGeneration,
+      });
+    }
     context.emit({
       id: context.jobId,
       kind: "gemma-analysis",

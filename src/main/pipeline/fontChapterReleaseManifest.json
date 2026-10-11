@@ -373,5 +373,19 @@
         "sha256": "9a60dcbcfcf2deaa5ffade6fcc045dcb1eabbd95d6586f035d6bc8e7232cfdab"
       }
     }
+  },
+  "windowsPython312": {
+    "tag": "font-chapter-c23-20260909-r2",
+    "assetRoot": "models/fc23-r2",
+    "archive": {
+      "path": "font-chapter-c23-win32-x64.zip",
+      "bytes": 492932823,
+      "sha256": "302b6ab214ea4cadac864eaeb42cbb30c44ca30377434b2327fd0fa7fd9be360"
+    },
+    "pythonInventory": {
+      "path": "python-inventory.json",
+      "bytes": 364475,
+      "sha256": "6f1b97543c45dbb7d8ff411341162fb3a0b07b49b6c071d3e6e80f2ba1a41e3e"
+    }
   }
 }

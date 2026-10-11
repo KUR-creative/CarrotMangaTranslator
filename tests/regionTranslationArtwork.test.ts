@@ -140,8 +140,20 @@ describe("configured local region inpainting", () => {
         detections: [],
       },
     }));
-    fixture.dependencies.createBubbleLayoutRunner = () => ({ runPage });
+    const preparePages = vi.fn(async () => {
+      expect(fixture.acquire).not.toHaveBeenCalled();
+    });
+    const dispose = vi.fn(async () => {
+      expect(fixture.release).toHaveBeenCalledOnce();
+    });
+    fixture.dependencies.createBubbleLayoutRunner = () => ({
+      runPage,
+      preparePages,
+      dispose,
+    });
     await prepareRegionArtwork(fixture.input, fixture.dependencies);
+    expect(preparePages).toHaveBeenCalledOnce();
+    expect(dispose).toHaveBeenCalledOnce();
     expect(runPage).toHaveBeenCalledExactlyOnceWith(
       expect.objectContaining({
         sourceEraseMask: true,

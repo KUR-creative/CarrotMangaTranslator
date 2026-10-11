@@ -1,4 +1,5 @@
-import type { MangaPage } from "../../shared/libraryTypes";
+import type { ChapterSnapshot, MangaPage } from "../../shared/libraryTypes";
+import type { PageWorkflowStage } from "../../shared/pageWorkflowStages";
 import { PageWorkflowPartialFailure } from "../application/pageWorkflowPartialFailure";
 import {
   workflowRegionKey,
@@ -9,6 +10,7 @@ import { acquireCodexInpaintingEngine } from "../inpainting/codexInpaintingEngin
 import { inpaintPatternPage } from "../inpainting/patternPage";
 import { createProductionBubbleLayoutRunner } from "../bubbleLayout/bubbleLayoutFacade";
 import { runBubbleLayoutMaskPrepass } from "../jobs/bubbleLayoutJob";
+import { emitInpaintingMaskPreparation } from "../jobs/inpaintingJobProgress";
 import { runBubbleLayoutPostprocess } from "../inpainting/bubbleLayoutRunner";
 import { applyInpaintingLayoutStates } from "../inpainting/inpaintingLayoutState";
 import { applyNaturalTextLayout } from "../../shared/naturalTextLayout";
@@ -39,9 +41,52 @@ export function createWorkflowImages(
   runtime = productionRuntime,
 ) {
   const runner = workflowBubbleRunner(context, runtime);
+  let preparedPaths: Set<string> | undefined;
+  const prepare = async (pages: readonly MangaPage[]) => {
+    if (
+      preparedPaths &&
+      pages.every((page) => preparedPaths?.has(page.imagePath))
+    )
+      return;
+    if (
+      context.plan.erasureEngine !== "codex" &&
+      (context.settings.inpainting?.model ?? "flux-klein") === "flux-klein"
+    ) {
+      await runner.preparePages?.(pages, context.signal, (page, index) =>
+        emitInpaintingMaskPreparation(
+          context.runId,
+          context.emit,
+          page,
+          index,
+          pages.length,
+          "gemma-analysis",
+        ),
+      );
+      preparedPaths = new Set(pages.map((page) => page.imagePath));
+    }
+  };
   return {
-    erase: (page: MangaPage) =>
-      eraseWorkflowPage(context, page, runner, runtime),
+    prepare,
+    prepareStage: async (
+      stage: PageWorkflowStage,
+      chapter: ChapterSnapshot,
+      pageIds: string[],
+    ) => {
+      if (
+        stage === "erase" ||
+        (stage === "layout" && context.plan.bubbleLayout)
+      )
+        await prepare(
+          chapter.pages.filter((page) => pageIds.includes(page.id)),
+        );
+    },
+    dispose: async () => {
+      await runner.dispose?.();
+    },
+    erase: async (page: MangaPage) => {
+      if (!preparedPaths) await prepare([page]);
+      return eraseWorkflowPage(context, page, runner, runtime);
+    },
     layout: (page: MangaPage) => layoutWorkflowPage(context, page, runner),
   };
 }

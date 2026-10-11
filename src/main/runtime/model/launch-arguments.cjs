@@ -151,7 +151,7 @@ function buildSamplingArgs(options) {
     "--temp",
     String(
       options.temperature ??
-        configuredSamplingValue(options, "MANGA_TRANSLATOR_TEMPERATURE", "0.2"),
+        configuredSamplingValue(options, "MANGA_TRANSLATOR_TEMPERATURE", "0.1"),
     ),
     "--top-k",
     String(

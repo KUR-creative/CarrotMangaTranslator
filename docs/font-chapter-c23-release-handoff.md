@@ -1,5 +1,37 @@
 # C23 공개 런타임 배포
 
+## 2026-10-11: 기존 Python과 폰트 패키지 ABI 일치
+
+dev의 기존 Hayai CUDA venv는 Python 3.12.7인데 Windows 폰트 팩을 무조건
+r3(CPython 3.14)로 선택해 NumPy import가 실패했다. 설치판에도 기존 3.12
+환경이 남으면 같은 조합이 가능하다. dev 전용 분기나 Python/PyTorch/CUDA
+재설치 대신 공통 chapter 경로에서 실제 OCR 실행 파일의 `sys.implementation.cache_tag`와
+정확한 Python 버전을 조회한다. 조회한 동일 실행 파일/환경을 worker에 전달한다.
+
+- Windows `cpython-312`: 기존 불변 r2 ZIP/의존 inventory와 `models/fc23-r2/win32-x64`.
+- Windows `cpython-314`: 기존 불변 r3 ZIP/의존 inventory와 `models/fc23-r3/win32-x64`.
+- macOS arm64는 기존 CPython 3.12 팩을 유지한다. 미지원 ABI는 다운로드/추론 전에 거부한다.
+
+학습 파일, 알고리즘, 해시 검증 및 모델 결과 계약은 바꾸지 않았다. Python 버전을
+추가 설치하거나 GPU 패키지를 교체하지 않는다. 선택한 Python 경로/버전/ABI는 로그에 남긴다.
+긴 Python traceback이 JobEvent의 1,000자 제한을 넘어서 실패 상태 전달까지 깨지던 문제도
+공통 이벤트 경계에서 수정했다. 화면/저장 이벤트의 표시 문자열은 계약 한도에 맞추고
+원문 진단은 로그에 보존한다.
+
+검증 근거는 `.tmp/dev-font-fix/`에 보존한다. 실패 작업의 원본 2페이지를 동일하게 넣어
+기존 dev Python 3.12.7 및 설치판의 관리형 Python 3.14.8로 production worker를 실행했다.
+두 환경 모두 완료했고 선택 11개가 정확히 같으며 원본 SHA-256도 같다(`parity.json`).
+r2/r3 ZIP을 GitHub에서 다시 내려받아 각각 위에 기록한 size/SHA-256을 확인했다.
+새 폴더에 production installer로 검증·압축 해제한 후 각 Python으로 네이티브 import,
+동결 전처리와 두 ONNX 모델의 기존 수치 parity를 통과했다
+(`verified-cpython-312/receipt.json`, `verified-cpython-314/receipt.json`).
+앱 downloader의 빈 캐시 네트워크 검사는 전송이 정체돼 중단했으며, 이를 성공으로 세지 않는다.
+재다운로드는 GitHub CLI, 설치/전체 inventory 검증은 실제 앱 코드를 사용했다.
+
+기존 태그/자산을 재게시하거나 덮어쓰지 않았다. 이 코드 변경만으로 이미 배포된 앱
+설치 파일이 바뀌지는 않는다. rollback은 이 선택 코드 변경을 되돌리는 것이지만,
+3.12 환경에 r3를 고정하면 원래 오류가 다시 발생한다.
+
 ## v3.2.3: Windows Python 3.14 호환성
 
 현재 소비 태그는 [font-chapter-c23-20261008-r3](https://github.com/ucx0204/CarrotMangaTranslator/releases/tag/font-chapter-c23-20261008-r3),

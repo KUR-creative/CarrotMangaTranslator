@@ -215,7 +215,13 @@ describe("semantic OCR structured output budgets", () => {
 
   it("keeps llama.cpp's native structured-output and sampling contract", () => {
     const body = buildSemanticStageRequestBody(
-      { modelProvider: "gemma", maxTokens: 24_576, temperature: 0.2 },
+      {
+        modelProvider: "gemma",
+        maxTokens: 24_576,
+        temperature: 0.1,
+        topP: 0.95,
+        topK: 64,
+      },
       messages,
       responseFormat,
       "translation",

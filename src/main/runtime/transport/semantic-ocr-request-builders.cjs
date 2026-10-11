@@ -147,15 +147,11 @@ function buildSemanticStageRequestBody(
     reasoning_format: "none",
     reasoning_budget: 0,
     enable_thinking: false,
-    temperature:
-      stage === "grouping"
-        ? 0
-        : Math.max(0, Math.min(0.2, Number(options.temperature) || 0.2)),
-    top_p: 0.95,
-    top_k: 64,
+    // Group classification is deterministic; translation inherits the input sampler.
+    ...(stage === "grouping" ? { temperature: 0 } : {}),
     seed: SEMANTIC_SEED,
     cache_prompt: false,
-    // Fixed sampling contract for stable small-model output.
+    // Repetition controls are independent of the configured sampling values.
     repeat_penalty: SEMANTIC_REPEAT_PENALTY,
     repeat_last_n: SEMANTIC_REPEAT_LAST_N,
   });
