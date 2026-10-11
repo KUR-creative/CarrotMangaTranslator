@@ -1,8 +1,9 @@
 import { mkdtemp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { delimiter, join, win32 } from "node:path";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { prepareNativeInferenceLaunch } from "../src/main/runtimeSupport/nativeInferenceLaunch";
+import windowsRuntimePaths from "./fixtures/windows-native-runtime-paths.json";
 
 const mock = vi.hoisted(() => ({ install: vi.fn(), exec: vi.fn() }));
 vi.mock("../src/main/runtimeSupport/nativeInferenceRuntime", () => ({
@@ -43,6 +44,31 @@ const options = () => ({
 });
 
 describe("native inference launch", () => {
+  it.each(windowsRuntimePaths)(
+    "keeps native SDK environment paths joinable: $input",
+    async ({ input, expected }) => {
+      vi.stubGlobal("process", { ...process, platform: "win32" });
+      const manifest = win32.join(input, "runtime.json");
+      mock.install.mockResolvedValue({
+        directory: input,
+        manifest,
+        pathDirectories: [input, win32.join(input, "_rocm_sdk_core", "bin")],
+      });
+      const result = await prepareNativeInferenceLaunch({
+        ...options(),
+        backend: "rocm",
+        computeGpuIndex: 1,
+      });
+      const paths = [expected, win32.join(expected, "_rocm_sdk_core", "bin")];
+      expect(result.env.PATH?.split(delimiter).slice(0, 2)).toEqual(paths);
+      expect(
+        mock.exec.mock.calls[0]?.[2].env.PATH.split(delimiter).slice(0, 2),
+      ).toEqual(paths);
+      expect(result.env.HIP_PATH).toBe(win32.join(expected, "_rocm_sdk_core"));
+      expect(result.env.ROCM_PATH).toBe(win32.join(expected, "_rocm_sdk_core"));
+      expect(result.manifest).toBe(manifest);
+    },
+  );
   it("uses the selected engine runtime without probing an unrelated GPU", async () => {
     const result = await prepareNativeInferenceLaunch(options());
     expect(mock.exec).not.toHaveBeenCalled();

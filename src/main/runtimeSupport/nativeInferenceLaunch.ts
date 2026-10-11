@@ -39,17 +39,34 @@ export async function prepareNativeInferenceLaunch(
     executable,
     manifest: runtime.manifest,
     env: {
-      PATH: [...runtime.pathDirectories, process.env.PATH]
+      PATH: [
+        ...runtime.pathDirectories.map(runtimeEnvironmentPath),
+        process.env.PATH,
+      ]
         .filter(Boolean)
         .join(delimiter),
       ...(options.backend === "rocm"
         ? {
-            HIP_PATH: join(runtime.directory, "_rocm_sdk_core"),
-            ROCM_PATH: join(runtime.directory, "_rocm_sdk_core"),
+            HIP_PATH: runtimeEnvironmentPath(
+              join(runtime.directory, "_rocm_sdk_core"),
+            ),
+            ROCM_PATH: runtimeEnvironmentPath(
+              join(runtime.directory, "_rocm_sdk_core"),
+            ),
           }
         : {}),
     },
   };
+}
+
+function runtimeEnvironmentPath(path: string): string {
+  // Windows SDKs may append forward slashes to these directories. Keep the
+  // installer's verbatim namespace out of native-library environment paths.
+  return process.platform === "win32"
+    ? path
+        .replace(/^\\\\\?\\UNC\\/i, "\\\\")
+        .replace(/^\\\\\?\\([a-z]:\\)/i, "$1")
+    : path;
 }
 
 async function probeRocmTarget(options: LaunchOptions): Promise<string> {
@@ -60,7 +77,10 @@ async function probeRocmTarget(options: LaunchOptions): Promise<string> {
   const index = normalizeComputeGpuIndex(options.computeGpuIndex) ?? 0;
   const probeEnv: NodeJS.ProcessEnv = {
     ...process.env,
-    PATH: [...core.pathDirectories, process.env.PATH]
+    PATH: [
+      ...core.pathDirectories.map(runtimeEnvironmentPath),
+      process.env.PATH,
+    ]
       .filter(Boolean)
       .join(delimiter),
   };

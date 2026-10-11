@@ -26,6 +26,8 @@ jobs:
           phase: build
       - name: Run static, build and Electron checks
         run: npm run check -- --phase=build
+      - name: Test Windows native DLL and kernel path contracts
+        run: cargo test --locked --manifest-path tools/runner-runtime-policy/Cargo.toml
       - name: Validate published Windows CUDA, AMD and Vulkan command lines
         timeout-minutes: 30
         run: node scripts/verify-llama-runtime-cli.cjs

@@ -18,6 +18,31 @@
     "mac": "Native Metal libraries and colocated worker; macOS arm64 builds/Rust tests and real CPU inference passed. Metal GPU inference unverified."
   },
   "validation": {
+    "issue147WindowsNativePaths": {
+      "date": "2026-10-11",
+      "issue": "https://github.com/ucx0204/CarrotMangaTranslator/issues/147#issuecomment-6103731697",
+      "evidence": "plantsun450 v3.3.1 app (9).log and default.log: gfx1200 hipBLASLt kernel lookup used a verbatim Windows directory followed by a forward slash, then exited with 0xC0000005. The pinned gfx1200 wheel contains the reported kernel; its 377648520 bytes and SHA-256 f33226078932ee2200f5595c521895edf5d7abf3170975d8c6f72a2a3949f516 were independently verified.",
+      "rootCause": "The shared Rust native loader canonicalized every DLL to a verbatim Windows path. GetModuleFileNameW preserves that spelling, and DLL-relative GPU kernel discovery appends forward slashes. Raw CreateFileW rejects the resulting mixed-separator verbatim path with error 123 even when the file exists.",
+      "scope": "Fix the common loader for diffusion, LibTorch and ROCm probing, including DLL-relative hipBLASLt/rocBLAS/other native resource discovery. Normalize app-managed PATH, HIP_PATH and ROCM_PATH at worker/probe launch too. Extraction, checksum receipts, model paths, data roots and GPU-selection authority stay in their existing owners.",
+      "longPaths": "Canonical DLL identities are preserved while drive/UNC spelling becomes joinable. Existing DOS directory aliases handle MAX_PATH-limited native DLLs; vcomp140.dll retains its previous verbatim loading behavior if an alias is unavailable. No links, directory relocation or system settings are created. Paths on volumes without DOS aliases cannot all be certified for third-party MAX_PATH-only libraries.",
+      "regressionTests": "Rust native policy: 8 passed, including an actual DLL load and raw CreateFileW kernel read from a long Unicode path. TypeScript installer/launch/plan: 29 passed. Rust and TypeScript consume the same drive/UNC/Unicode/long-path fixture. Windows Check now runs the Rust tests with a longPathAware test manifest matching the worker policy.",
+      "repositoryCheck": "Node 26.10.0 scripts/check.cjs: all 27 gates passed, 10633 tests passed and 9 skipped; type checks, lint, coverage, build, Electron image protocol and zero-mismatch page artwork parity passed (481.75 seconds).",
+      "inferenceSmoke": ".tmp/issue-147/smoke-results.json records FLUX CUDA, LaMa CPU/CUDA and AOT CPU/CUDA inference using synthetic 256x256 input and DLL paths longer than 260 characters with Korean text and spaces.",
+      "hardwareLimit": "Local GPU is RTX 4090. The Windows file-path failure is reproduced and fixed; RX 9060 XT / gfx1200 inference still requires AMD hardware validation. Existing gfx1200 packages are unchanged.",
+      "rebuiltBundledWorkers": [
+        {
+          "path": "tools/mgt-flux-klein/mgt-flux-klein.exe",
+          "bytes": 8436224,
+          "sha256": "371abcfaf174799f5223018e0e59efb3af0953c01f931aefcaa6f60941b208be"
+        },
+        {
+          "path": "tools/mgt-koharu-inpaint-runner/mgt-koharu-inpaint-runner.exe",
+          "bytes": 55412224,
+          "sha256": "5b0873e21e0652c897734bd71d171484ff6a1b1ed40f9a9bf26b0963f6676850"
+        }
+      ],
+      "distribution": "The v3.3.2 app release includes the rebuilt bundled Windows workers. Immutable remote CPU assets and GPU packages are unchanged. Existing managed Flux worker copies update by comparing the bundled worker hash; Koharu copies the bundled worker at launch."
+    },
     "preMoveImageTests": 18,
     "adapterTests": 19,
     "nativePolicyTests": 5,

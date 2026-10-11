@@ -29,6 +29,8 @@ pub fn load_runtime(manifest: &Path, expected_engine: &str) -> Result<LoadedRunt
         let path = path
             .canonicalize()
             .with_context(|| format!("missing runtime library {}", path.display()))?;
+        #[cfg(windows)]
+        let path = windows_loader_path(&path);
         // Keep handles alive for the entire worker/model lifetime.
         libraries.push(
             unsafe { open_library(&path) }
@@ -39,6 +41,61 @@ pub fn load_runtime(manifest: &Path, expected_engine: &str) -> Result<LoadedRunt
         specification,
         _libraries: libraries,
     })
+}
+
+#[cfg(windows)]
+fn windows_loader_path(path: &Path) -> PathBuf {
+    use std::os::windows::ffi::{OsStrExt, OsStringExt};
+    use std::path::{Component, Prefix};
+    let mut components = path.components();
+    let Some(Component::Prefix(prefix)) = components.next() else {
+        return path.to_owned();
+    };
+    // LoadLibraryExW preserves this spelling in GetModuleFileNameW. Libraries
+    // such as Tensile append forward slashes to that path when finding kernels;
+    // Win32 rejects those slashes under the verbatim namespace (issue #147).
+    let mut result = match prefix.kind() {
+        Prefix::VerbatimDisk(drive) => PathBuf::from(format!("{}:", drive as char)),
+        Prefix::VerbatimUNC(server, share) => PathBuf::from(r"\\").join(server).join(share),
+        _ => return path.to_owned(),
+    };
+    result.push(components.as_path());
+    // Some bundled DLLs (notably MSVC OpenMP) still fail at MAX_PATH even in
+    // a longPathAware process. Use the existing directory's DOS alias when
+    // available; keep the DLL basename so dependency lookup remains stable.
+    if result.as_os_str().encode_wide().count() >= 260 {
+        #[link(name = "kernel32")]
+        unsafe extern "system" {
+            fn GetShortPathNameW(input: *const u16, output: *mut u16, size: u32) -> u32;
+        }
+        if let (Some(parent), Some(name)) = (path.parent(), path.file_name()) {
+            let input: Vec<u16> = parent.as_os_str().encode_wide().chain(Some(0)).collect();
+            let mut output = vec![0u16; 32768];
+            let length = unsafe {
+                GetShortPathNameW(input.as_ptr(), output.as_mut_ptr(), output.len() as u32)
+            } as usize;
+            if length > 0 && length < output.len() {
+                let shortened =
+                    PathBuf::from(std::ffi::OsString::from_wide(&output[..length])).join(name);
+                // An alias can be unavailable on a volume. Do not recurse when
+                // GetShortPathNameW returns the original long directory.
+                if shortened.as_os_str().encode_wide().count()
+                    < path.as_os_str().encode_wide().count()
+                {
+                    return windows_loader_path(&shortened);
+                }
+            }
+        }
+        // Volumes can disable DOS aliases. Preserve the old loading contract
+        // for OpenMP, which has no DLL-relative GPU kernels to discover.
+        if path
+            .file_name()
+            .is_some_and(|name| name.eq_ignore_ascii_case("vcomp140.dll"))
+        {
+            return path.to_owned();
+        }
+    }
+    result
 }
 
 fn validate_specification(spec: &NativeRuntime, expected_engine: &str) -> Result<()> {
@@ -163,6 +220,121 @@ unsafe fn open_library(path: &Path) -> Result<libloading::Library, libloading::E
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[cfg(windows)]
+    #[test]
+    fn loader_paths_preserve_drive_unc_unicode_and_long_paths() {
+        #[derive(Deserialize)]
+        struct Fixture {
+            input: String,
+            expected: String,
+        }
+        let fixtures: Vec<Fixture> = serde_json::from_str(include_str!(
+            "../../../tests/fixtures/windows-native-runtime-paths.json"
+        ))
+        .unwrap();
+        for fixture in fixtures {
+            assert_eq!(
+                windows_loader_path(Path::new(&fixture.input)),
+                Path::new(&fixture.expected)
+            );
+        }
+    }
+
+    #[cfg(windows)]
+    #[test]
+    fn openmp_keeps_long_path_loading_when_a_dos_alias_is_unavailable() {
+        let path = PathBuf::from(format!(
+            r"\\?\C:\mgt-nonexistent-{}\{}\vcomp140.dll",
+            std::process::id(),
+            "x".repeat(240)
+        ));
+        assert_eq!(windows_loader_path(&path), path);
+    }
+
+    #[cfg(windows)]
+    #[test]
+    fn loaded_library_exposes_a_joinable_path_even_in_a_long_unicode_directory() {
+        use std::os::windows::ffi::{OsStrExt, OsStringExt};
+        use std::time::{SystemTime, UNIX_EPOCH};
+        #[link(name = "kernel32")]
+        unsafe extern "system" {
+            fn GetModuleFileNameW(module: isize, path: *mut u16, size: u32) -> u32;
+            fn CreateFileW(
+                path: *const u16,
+                access: u32,
+                share: u32,
+                security: *const std::ffi::c_void,
+                disposition: u32,
+                flags: u32,
+                template: isize,
+            ) -> isize;
+            fn CloseHandle(handle: isize) -> i32;
+        }
+        let root = std::env::temp_dir().join(format!(
+            "mgt-native-path-{}-{}",
+            std::process::id(),
+            SystemTime::now()
+                .duration_since(UNIX_EPOCH)
+                .unwrap()
+                .as_nanos()
+        ));
+        let directory = root.join(format!("한글 with spaces-{}", "x".repeat(180)));
+        std::fs::create_dir_all(&directory).unwrap();
+        let dll = directory.join("path-fixture.dll");
+        std::fs::copy(
+            Path::new(&std::env::var_os("SystemRoot").unwrap()).join("System32/version.dll"),
+            &dll,
+        )
+        .unwrap();
+        let manifest = root.join("runtime.json");
+        std::fs::write(
+            &manifest,
+            serde_json::to_vec(&serde_json::json!({
+                "schema": 1, "engine": "diffusion", "backend": "rocm", "libraries": [dll]
+            }))
+            .unwrap(),
+        )
+        .unwrap();
+        let runtime = load_runtime(&manifest, "diffusion").unwrap();
+        let library: libloading::os::windows::Library =
+            runtime._libraries.into_iter().next().unwrap().into();
+        let handle = library.into_raw();
+        let mut buffer = vec![0u16; 32768];
+        let length =
+            unsafe { GetModuleFileNameW(handle, buffer.as_mut_ptr(), buffer.len() as u32) };
+        let loaded = PathBuf::from(std::ffi::OsString::from_wide(&buffer[..length as usize]));
+        let kernel_dir = directory.join("kernels/gfx1200");
+        std::fs::create_dir_all(&kernel_dir).unwrap();
+        std::fs::write(
+            kernel_dir.join("Kernels.so-000-gfx1200.hsaco"),
+            b"kernel fixture",
+        )
+        .unwrap();
+        let mut mixed_path = loaded.parent().unwrap().as_os_str().to_owned();
+        mixed_path.push("/kernels/gfx1200/Kernels.so-000-gfx1200.hsaco");
+        let wide: Vec<u16> = mixed_path.encode_wide().chain(Some(0)).collect();
+        let kernel =
+            unsafe { CreateFileW(wide.as_ptr(), 0x80000000, 7, std::ptr::null(), 3, 0, 0) };
+        let error = std::io::Error::last_os_error();
+        if kernel != -1 {
+            unsafe {
+                CloseHandle(kernel);
+            }
+        }
+        drop(unsafe { libloading::os::windows::Library::from_raw(handle) });
+        std::fs::remove_dir_all(&root).unwrap();
+        assert_ne!(kernel, -1, "DLL-relative kernel file must open: {error}");
+        assert!(
+            dll.as_os_str().encode_wide().count() > 260,
+            "test must cover a long Windows DLL path"
+        );
+        assert!(
+            !loaded.as_os_str().to_string_lossy().starts_with(r"\\?\"),
+            "DLL-relative kernel discovery must be able to append forward slashes: {}",
+            loaded.display()
+        );
+    }
     #[test]
     fn recognizes_exact_rocm_target_without_accepting_grouped_names() {
         assert_eq!(
