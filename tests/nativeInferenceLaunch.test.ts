@@ -60,12 +60,15 @@ describe("native inference launch", () => {
         computeGpuIndex: 1,
       });
       const paths = [expected, win32.join(expected, "_rocm_sdk_core", "bin")];
-      expect(result.env.PATH?.split(delimiter).slice(0, 2)).toEqual(paths);
-      expect(
-        mock.exec.mock.calls[0]?.[2].env.PATH.split(delimiter).slice(0, 2),
-      ).toEqual(paths);
-      expect(result.env.HIP_PATH).toBe(win32.join(expected, "_rocm_sdk_core"));
-      expect(result.env.ROCM_PATH).toBe(win32.join(expected, "_rocm_sdk_core"));
+      // Stubbing process.platform does not change node:path's host semantics.
+      // Compare the complete PATH so POSIX ':' does not split a drive letter.
+      const expectedPath = [...paths, process.env.PATH]
+        .filter(Boolean)
+        .join(delimiter);
+      expect(result.env.PATH).toBe(expectedPath);
+      expect(mock.exec.mock.calls[0]?.[2].env.PATH).toBe(expectedPath);
+      expect(result.env.HIP_PATH).toBe(join(expected, "_rocm_sdk_core"));
+      expect(result.env.ROCM_PATH).toBe(join(expected, "_rocm_sdk_core"));
       expect(result.manifest).toBe(manifest);
     },
   );
