@@ -1,4 +1,4 @@
-import { mkdtemp, mkdir, rm, writeFile } from "node:fs/promises";
+import { mkdtemp, mkdir, realpath, rm, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
 import { afterEach, describe, expect, it, vi } from "vitest";
@@ -56,7 +56,7 @@ describe("multi-folder native import preview", () => {
       ),
     ).toEqual(["26/0001.png", "26 (2)/0001.png"]);
     expect(result.preview.chapters[0].pages[0].sourcePath).toBe(
-      join(left, "0001.png"),
+      await realpath(join(left, "0001.png")),
     );
     await result.cleanup?.();
   });
