@@ -16,6 +16,10 @@ export const MASK_ADJUSTMENT_RADIUS_RANGE = { min: 1, max: 32 } as const;
 export const REGION_REVIEW_BRUSH_SIZE_RANGE = { min: 1, max: 400 } as const;
 /** Saved swatches shared by every color control in the app. */
 export const COLOR_PALETTE_MAX_SWATCHES = 24;
+/** Dragged left-rail width in CSS px; `null` keeps the responsive default. */
+export const SIDEBAR_WIDTH_RANGE = { min: 240, max: 760 } as const;
+/** Library panel's share of the space it splits with the page list. */
+const SIDEBAR_LIBRARY_SPLIT_RANGE = { min: 0.05, max: 0.95 } as const;
 
 export type SidebarCollapsedPanel = "library" | "pages" | null;
 
@@ -27,6 +31,8 @@ export type WorkspacePreferences = {
   editorFloating: boolean;
   stageToolbarHidden: boolean;
   sidebarCollapsedPanel: SidebarCollapsedPanel;
+  sidebarWidth: number | null;
+  sidebarLibrarySplit: number | null;
   webImportSizeFilter: WebImportSizeFilter;
   /** Opens translation settings after an import; never starts a run itself. */
   openTranslationAfterImport: boolean;
@@ -51,6 +57,8 @@ export const DEFAULT_WORKSPACE_PREFERENCES: Readonly<WorkspacePreferences> = {
   editorFloating: false,
   stageToolbarHidden: false,
   sidebarCollapsedPanel: null,
+  sidebarWidth: null,
+  sidebarLibrarySplit: null,
   webImportSizeFilter: "large",
   openTranslationAfterImport: true,
   skipDuplicateChapterTitles: false,
@@ -86,6 +94,12 @@ const NORMALIZERS: PreferenceNormalizers = {
     value === "library" || value === "pages" || value === null
       ? value
       : undefined,
+  sidebarWidth: (value) =>
+    value === null ? null : normalizeInteger(value, SIDEBAR_WIDTH_RANGE),
+  sidebarLibrarySplit: (value) =>
+    value === null
+      ? null
+      : normalizeFraction(value, SIDEBAR_LIBRARY_SPLIT_RANGE),
   webImportSizeFilter: (value) =>
     value === "all" || value === "medium-or-larger" || value === "large"
       ? value
@@ -195,6 +209,15 @@ function normalizeInteger(
 ): number | undefined {
   if (typeof value !== "number" || !Number.isFinite(value)) return undefined;
   return Math.max(range.min, Math.min(range.max, Math.round(value)));
+}
+
+function normalizeFraction(
+  value: unknown,
+  range: { min: number; max: number },
+): number | undefined {
+  if (typeof value !== "number" || !Number.isFinite(value)) return undefined;
+  const clamped = Math.max(range.min, Math.min(range.max, value));
+  return Math.round(clamped * 1000) / 1000;
 }
 
 /** Keeps valid, distinct `#rrggbb` swatches in saved order. */

@@ -577,7 +577,8 @@ describe("production cleanup coverage floor gate", () => {
     // six newly touched existing report modules retain the original measured floors.
     // Issue #150 adds the in-app color picker, its pacing and the shared palette;
     // the newly touched cssColor module keeps its original measured floor.
-    expect(scope.added).toHaveLength(1475);
+    // Issue #149 adds the resizable left rail: its splitter primitive and owners.
+    expect(scope.added).toHaveLength(1479);
     expect(scope.deleted).toHaveLength(12);
   });
 });

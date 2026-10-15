@@ -71,7 +71,12 @@
     "share": "Export work",
     "importWork": "Import work",
     "showNavigator": "Open navigation panel",
-    "hideNavigator": "Close navigation panel"
+    "hideNavigator": "Close navigation panel",
+    "resizeWidth": "Resize left panel",
+    "resizeWidthHint": "Drag to resize · Double-click for default width",
+    "resetWidth": "Reset left panel width",
+    "resizeSplit": "Resize library and pages",
+    "resizeSplitHint": "Drag to resize · Double-click for default split"
   },
   "conditionalBatch": {
     "open": "Batch edit text",

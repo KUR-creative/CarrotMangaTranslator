@@ -71,7 +71,12 @@
     "share": "匯出專案",
     "importWork": "匯入專案",
     "showNavigator": "開啟導覽面板",
-    "hideNavigator": "關閉導覽面板"
+    "hideNavigator": "關閉導覽面板",
+    "resizeWidth": "調整左側面板寬度",
+    "resizeWidthHint": "拖曳調整寬度 · 按兩下恢復預設寬度",
+    "resetWidth": "恢復左側面板預設寬度",
+    "resizeSplit": "調整書庫與頁面高度",
+    "resizeSplitHint": "拖曳調整高度 · 按兩下恢復預設比例"
   },
   "conditionalBatch": {
     "open": "批次編輯文字",

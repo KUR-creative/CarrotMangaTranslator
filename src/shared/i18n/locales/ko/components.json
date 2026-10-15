@@ -71,7 +71,12 @@
     "share": "작업 내보내기",
     "importWork": "작업 가져오기",
     "showNavigator": "탐색 패널 열기",
-    "hideNavigator": "탐색 패널 닫기"
+    "hideNavigator": "탐색 패널 닫기",
+    "resizeWidth": "왼쪽 패널 너비 조절",
+    "resizeWidthHint": "드래그해서 너비 조절 · 더블클릭하면 기본 너비",
+    "resetWidth": "왼쪽 패널 기본 너비로",
+    "resizeSplit": "보관함과 페이지 높이 조절",
+    "resizeSplitHint": "드래그해서 높이 조절 · 더블클릭하면 기본 비율"
   },
   "conditionalBatch": {
     "open": "텍스트 일괄 편집",

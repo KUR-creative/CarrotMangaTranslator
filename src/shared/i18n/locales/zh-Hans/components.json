@@ -71,7 +71,12 @@
     "share": "导出项目",
     "importWork": "导入项目",
     "showNavigator": "打开导航面板",
-    "hideNavigator": "关闭导航面板"
+    "hideNavigator": "关闭导航面板",
+    "resizeWidth": "调整左侧面板宽度",
+    "resizeWidthHint": "拖动调整宽度 · 双击恢复默认宽度",
+    "resetWidth": "恢复左侧面板默认宽度",
+    "resizeSplit": "调整书库与页面高度",
+    "resizeSplitHint": "拖动调整高度 · 双击恢复默认比例"
   },
   "conditionalBatch": {
     "open": "批量编辑文本",

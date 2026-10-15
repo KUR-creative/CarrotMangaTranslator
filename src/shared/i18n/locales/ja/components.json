@@ -71,7 +71,12 @@
     "share": "作業を書き出す",
     "importWork": "作業を読み込む",
     "showNavigator": "ナビゲーションパネルを開く",
-    "hideNavigator": "ナビゲーションパネルを閉じる"
+    "hideNavigator": "ナビゲーションパネルを閉じる",
+    "resizeWidth": "左パネルの幅を調整",
+    "resizeWidthHint": "ドラッグで幅を調整 · ダブルクリックで既定の幅",
+    "resetWidth": "左パネルを既定の幅に戻す",
+    "resizeSplit": "ライブラリとページの高さを調整",
+    "resizeSplitHint": "ドラッグで高さを調整 · ダブルクリックで既定の比率"
   },
   "conditionalBatch": {
     "open": "テキスト一括編集",
