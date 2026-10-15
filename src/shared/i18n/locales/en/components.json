@@ -1287,7 +1287,7 @@
     "retry": "Try again",
     "preparing": "Preparing safe diagnostics…",
     "copySuccess": "Diagnostics copied to the clipboard.",
-    "clipboardFallback": "The report was too long, so it was copied to the clipboard. Paste it into the GitHub issue that opened.",
+    "clipboardFallback": "A diagnostic summary is prefilled on GitHub. The full report is on the clipboard; paste it to include more detail.",
     "githubOpened": "The GitHub issue page is open. Review the content before submitting it.",
     "openLogs": "Open log folder",
     "openingLogs": "Opening log folder…",

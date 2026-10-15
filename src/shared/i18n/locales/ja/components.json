@@ -1287,7 +1287,7 @@
     "retry": "再試行",
     "preparing": "安全な診断情報を準備中…",
     "copySuccess": "診断情報をクリップボードにコピーしました。",
-    "clipboardFallback": "内容が長いためクリップボードにコピーしました。開いたGitHub Issueに貼り付けてください。",
+    "clipboardFallback": "診断の要約をGitHubに入力しました。完全なレポートはクリップボードにコピー済みです。必要に応じて貼り付けてください。",
     "githubOpened": "GitHubのIssue作成画面を開きました。内容を確認してから送信してください。",
     "openLogs": "ログフォルダーを開く",
     "openingLogs": "ログフォルダーを開いています…",

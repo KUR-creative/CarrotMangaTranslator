@@ -1287,7 +1287,7 @@
     "retry": "重试",
     "preparing": "正在准备安全的诊断信息…",
     "copySuccess": "诊断信息已复制到剪贴板。",
-    "clipboardFallback": "报告内容过长，已复制到剪贴板。请将其粘贴到已打开的GitHub议题中。",
+    "clipboardFallback": "已在 GitHub 填入诊断摘要，完整报告已复制到剪贴板。可粘贴以提供更多详情。",
     "githubOpened": "已打开GitHub议题创建页面。请检查内容后再提交。",
     "openLogs": "打开日志文件夹",
     "openingLogs": "正在打开日志文件夹…",
