@@ -176,6 +176,7 @@ function createTranslationAndRetouchShortcutHandlers(
     "retouch-tool-eraser": () => selectRetouchTool(chapter, "eraser"),
     "retouch-tool-eraser-rectangle": () =>
       selectRetouchTool(chapter, "eraser-rectangle"),
+    "retouch-tool-picker": () => selectRetouchTool(chapter, "picker"),
     "retouch-apply-mask": () =>
       inpainting.inpaintingBridge.contextValue.onRunDrawnPattern(),
     "retouch-cancel-mask": () => cancelRetouchMask(chapter, inpainting),

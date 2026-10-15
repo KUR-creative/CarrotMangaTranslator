@@ -1,6 +1,7 @@
 import {
   IconBoxOff,
   IconBrush,
+  IconColorPicker,
   IconEraser,
   IconHandStop,
   IconLassoPolygon,
@@ -35,6 +36,9 @@ const TOOL_ENTRIES: StageToolbarToolEntry[] = [
   toolEntry("ellipse", IconOval),
   toolEntry("eraser", IconEraser),
   toolEntry("eraser-rectangle", IconBoxOff),
+  // Shortcut-only: listed so the current-tool label can name it, but kept out
+  // of the paint group; the color field's picker replaces the toolbar button.
+  toolEntry("picker", IconColorPicker),
 ];
 
 export const STAGE_TOOL_BY_ID = new Map(

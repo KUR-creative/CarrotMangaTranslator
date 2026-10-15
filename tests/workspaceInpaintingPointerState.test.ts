@@ -14,7 +14,7 @@ describe("workspace inpainting pointer state", () => {
     expect(isRetouchDrawTool("brush")).toBe(true);
     expect(isRetouchDrawTool("eraser")).toBe(true);
     expect(isRetouchDrawTool("mask")).toBe(true);
-    expect(isRetouchDrawTool("rectangle")).toBe(false);
+    expect(isRetouchDrawTool("picker")).toBe(false);
     expect(isRetouchDrawTool("none")).toBe(false);
   });
 

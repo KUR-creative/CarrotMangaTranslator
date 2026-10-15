@@ -1212,6 +1212,10 @@
         "label": "Rectangle eraser",
         "title": "Drag to restore a rectangular area from the original image"
       },
+      "picker": {
+        "label": "Pick color",
+        "title": "Pick a canvas color"
+      },
       "warp": {
         "label": "Warp",
         "title": "Warp text by moving grid points"

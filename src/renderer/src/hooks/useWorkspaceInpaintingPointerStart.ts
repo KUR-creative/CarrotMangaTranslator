@@ -42,6 +42,7 @@ export function useInpaintingPointerDown(
         (options.jobActive ||
           pendingPageEdits.isHandingOff(options.selectedPage?.id)) &&
         options.inpaintingTool !== "mask" &&
+        options.inpaintingTool !== "picker" &&
         !isAlternateColorSample(options.inpaintingTool, event.altKey)
       )
         return true;
@@ -104,6 +105,11 @@ function handleToolPointerDown(
 ): void {
   if (event.button !== 0) return;
   if (isAlternateColorSample(options.inpaintingTool, event.altKey)) {
+    sampleInpaintingColor(options, resolved.point, t);
+    return;
+  }
+  // The "picker" tool has no toolbar button; it is reached with its shortcut.
+  if (options.inpaintingTool === "picker") {
     sampleInpaintingColor(options, resolved.point, t);
     return;
   }

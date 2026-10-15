@@ -16,6 +16,7 @@
  * - "ellipse": drag a filled ellipse onto the current inpainting result.
  * - "eraser": restore the underlying image below retouch strokes.
  * - "eraser-rectangle": restore a dragged rectangle from the original image.
+ * - "picker": sample a brush colour from the canvas.
  */
 export type WorkspaceTool =
   | "select"
@@ -30,14 +31,21 @@ export type WorkspaceTool =
   | "rectangle"
   | "ellipse"
   | "eraser"
-  | "eraser-rectangle";
+  | "eraser-rectangle"
+  | "picker";
 
 /** Backwards-compatible name used by existing stage interaction helpers. */
 export type StageTool = WorkspaceTool;
 
 export type RetouchTool = Extract<
   WorkspaceTool,
-  "mask" | "brush" | "rectangle" | "ellipse" | "eraser" | "eraser-rectangle"
+  | "mask"
+  | "brush"
+  | "rectangle"
+  | "ellipse"
+  | "eraser"
+  | "eraser-rectangle"
+  | "picker"
 >;
 
 export function isRetouchTool(tool: WorkspaceTool): tool is RetouchTool {
@@ -47,7 +55,8 @@ export function isRetouchTool(tool: WorkspaceTool): tool is RetouchTool {
     tool === "rectangle" ||
     tool === "ellipse" ||
     tool === "eraser" ||
-    tool === "eraser-rectangle"
+    tool === "eraser-rectangle" ||
+    tool === "picker"
   );
 }
 
