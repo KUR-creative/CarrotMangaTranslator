@@ -1,7 +1,6 @@
 import {
   IconBoxOff,
   IconBrush,
-  IconColorPicker,
   IconEraser,
   IconHandStop,
   IconLassoPolygon,
@@ -36,7 +35,6 @@ const TOOL_ENTRIES: StageToolbarToolEntry[] = [
   toolEntry("ellipse", IconOval),
   toolEntry("eraser", IconEraser),
   toolEntry("eraser-rectangle", IconBoxOff),
-  toolEntry("picker", IconColorPicker),
 ];
 
 export const STAGE_TOOL_BY_ID = new Map(
@@ -56,7 +54,7 @@ export const STAGE_TOOL_GROUPS: StageToolbarToolGroup[] = [
     id: "paint",
     labelKey: "stageToolbar.groups.paint.label",
     showSwatch: true,
-    tools: resolveTools(["brush", "rectangle", "ellipse", "picker"]),
+    tools: resolveTools(["brush", "rectangle", "ellipse"]),
   },
   {
     defaultTool: "eraser",

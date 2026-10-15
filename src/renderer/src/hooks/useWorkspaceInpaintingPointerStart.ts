@@ -42,7 +42,7 @@ export function useInpaintingPointerDown(
         (options.jobActive ||
           pendingPageEdits.isHandingOff(options.selectedPage?.id)) &&
         options.inpaintingTool !== "mask" &&
-        options.inpaintingTool !== "picker"
+        !isAlternateColorSample(options.inpaintingTool, event.altKey)
       )
         return true;
       const resolved = getImagePixelPoint(event, true);
@@ -104,10 +104,6 @@ function handleToolPointerDown(
 ): void {
   if (event.button !== 0) return;
   if (isAlternateColorSample(options.inpaintingTool, event.altKey)) {
-    sampleInpaintingColor(options, resolved.point, t);
-    return;
-  }
-  if (options.inpaintingTool === "picker") {
     sampleInpaintingColor(options, resolved.point, t);
     return;
   }

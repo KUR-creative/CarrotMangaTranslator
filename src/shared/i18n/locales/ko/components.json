@@ -37,6 +37,19 @@
     "search": "항목 검색",
     "noResults": "일치하는 항목이 없습니다."
   },
+  "colorPicker": {
+    "open": "{{label}} 선택",
+    "saturationValue": "채도와 밝기",
+    "saturationValueText": "채도 {{saturation}}%, 밝기 {{brightness}}%",
+    "hue": "색조",
+    "eyedropper": "화면에서 색 추출",
+    "r": "빨강",
+    "g": "초록",
+    "b": "파랑",
+    "palette": "팔레트",
+    "addToPalette": "현재 색을 팔레트에 저장",
+    "swatchHint": "{{color}} — 클릭해 적용, 우클릭이나 Delete로 삭제"
+  },
   "workSelect": {
     "search": "작품 검색",
     "chapterCount": "{{count}}개 화",
@@ -1139,7 +1152,7 @@
       },
       "paint": {
         "label": "칠하기 도구",
-        "title": "브러시·도형·색 추출 도구"
+        "title": "브러시·도형 도구"
       },
       "restore": {
         "label": "복원 도구",
@@ -1198,10 +1211,6 @@
       "eraser-rectangle": {
         "label": "사각 지우개",
         "title": "드래그한 사각형 영역을 원본 이미지로 복원"
-      },
-      "picker": {
-        "label": "색 추출",
-        "title": "캔버스에서 색 추출"
       },
       "warp": {
         "label": "워프",

@@ -1,3 +1,4 @@
+import { normalizeHexColor } from "./cssColor";
 import type { LibrarySort } from "./librarySort";
 import type { GatherField } from "../../../shared/gatherText";
 import type { WebImportSizeFilter } from "../../../shared/webImportTypes";
@@ -13,12 +14,15 @@ export const WORKSPACE_PREFERENCES_STORAGE_KEY = "workspace.preferences.v1";
 export const RETOUCH_BRUSH_RADIUS_RANGE = { min: 4, max: 90 } as const;
 export const MASK_ADJUSTMENT_RADIUS_RANGE = { min: 1, max: 32 } as const;
 export const REGION_REVIEW_BRUSH_SIZE_RANGE = { min: 1, max: 400 } as const;
+/** Saved swatches shared by every color control in the app. */
+export const COLOR_PALETTE_MAX_SWATCHES = 24;
 
 export type SidebarCollapsedPanel = "library" | "pages" | null;
 
 export type WorkspacePreferences = {
   inpaintingBrushRadius: number;
   inpaintingPaintColor: string;
+  colorPalette: readonly string[];
   maskAdjustmentRadius: number;
   editorFloating: boolean;
   stageToolbarHidden: boolean;
@@ -42,6 +46,7 @@ export type WorkspacePreferenceKey = keyof WorkspacePreferences;
 export const DEFAULT_WORKSPACE_PREFERENCES: Readonly<WorkspacePreferences> = {
   inpaintingBrushRadius: 28,
   inpaintingPaintColor: "#ffffff",
+  colorPalette: ["#ffffff", "#000000", "#808080"],
   maskAdjustmentRadius: 4,
   editorFloating: false,
   stageToolbarHidden: false,
@@ -72,6 +77,7 @@ const NORMALIZERS: PreferenceNormalizers = {
     typeof value === "string" && /^#[0-9a-f]{6}$/i.test(value)
       ? value.toLowerCase()
       : undefined,
+  colorPalette: normalizeColorPalette,
   maskAdjustmentRadius: (value) =>
     normalizeInteger(value, MASK_ADJUSTMENT_RADIUS_RANGE),
   editorFloating: normalizeBoolean,
@@ -189,6 +195,20 @@ function normalizeInteger(
 ): number | undefined {
   if (typeof value !== "number" || !Number.isFinite(value)) return undefined;
   return Math.max(range.min, Math.min(range.max, Math.round(value)));
+}
+
+/** Keeps valid, distinct `#rrggbb` swatches in saved order. */
+export function normalizeColorPalette(
+  value: unknown,
+): readonly string[] | undefined {
+  if (!Array.isArray(value)) return undefined;
+  const swatches: string[] = [];
+  for (const entry of value) {
+    const color = typeof entry === "string" ? normalizeHexColor(entry) : null;
+    if (color && !swatches.includes(color)) swatches.push(color);
+    if (swatches.length >= COLOR_PALETTE_MAX_SWATCHES) break;
+  }
+  return swatches;
 }
 
 function normalizeLinkedWorkspaceSort(value: unknown): LibrarySort | undefined {

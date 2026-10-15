@@ -234,13 +234,6 @@ export const SHORTCUT_ACTIONS: ShortcutActionDef[] = [
     enabled: (c) => c.chapterOpen,
   },
   {
-    id: "retouch-tool-picker",
-    label: "색상 추출",
-    category: "inpaint",
-    defaultCombo: "p",
-    enabled: (c) => c.chapterOpen,
-  },
-  {
     id: "retouch-apply-mask",
     label: "마스크 적용",
     category: "inpaint",

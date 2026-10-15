@@ -37,6 +37,19 @@
     "search": "Search options",
     "noResults": "No matching options."
   },
+  "colorPicker": {
+    "open": "Choose {{label}}",
+    "saturationValue": "Saturation and brightness",
+    "saturationValueText": "Saturation {{saturation}}%, brightness {{brightness}}%",
+    "hue": "Hue",
+    "eyedropper": "Pick a color from the screen",
+    "r": "Red",
+    "g": "Green",
+    "b": "Blue",
+    "palette": "Palette",
+    "addToPalette": "Save current color to palette",
+    "swatchHint": "{{color}} — click to apply, right-click or Delete to remove"
+  },
   "workSelect": {
     "search": "Search works",
     "chapterCount": "{{count}} chapters",
@@ -1139,7 +1152,7 @@
       },
       "paint": {
         "label": "Paint tools",
-        "title": "Brush, shape, and color picker tools"
+        "title": "Brush and shape tools"
       },
       "restore": {
         "label": "Restore tools",
@@ -1198,10 +1211,6 @@
       "eraser-rectangle": {
         "label": "Rectangle eraser",
         "title": "Drag to restore a rectangular area from the original image"
-      },
-      "picker": {
-        "label": "Pick color",
-        "title": "Pick a canvas color"
       },
       "warp": {
         "label": "Warp",

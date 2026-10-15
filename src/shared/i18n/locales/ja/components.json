@@ -37,6 +37,19 @@
     "search": "項目を検索",
     "noResults": "一致する項目がありません。"
   },
+  "colorPicker": {
+    "open": "{{label}}を選択",
+    "saturationValue": "彩度と明るさ",
+    "saturationValueText": "彩度 {{saturation}}%、明るさ {{brightness}}%",
+    "hue": "色相",
+    "eyedropper": "画面から色を抽出",
+    "r": "赤",
+    "g": "緑",
+    "b": "青",
+    "palette": "パレット",
+    "addToPalette": "現在の色をパレットに保存",
+    "swatchHint": "{{color}} — クリックで適用、右クリックまたは Delete で削除"
+  },
   "workSelect": {
     "search": "作品を検索",
     "chapterCount": "{{count}}話",
@@ -1139,7 +1152,7 @@
       },
       "paint": {
         "label": "描画ツール",
-        "title": "ブラシ・図形・色抽出ツール"
+        "title": "ブラシ・図形ツール"
       },
       "restore": {
         "label": "復元ツール",
@@ -1198,10 +1211,6 @@
       "eraser-rectangle": {
         "label": "矩形消しゴム",
         "title": "ドラッグした矩形範囲を元画像から復元"
-      },
-      "picker": {
-        "label": "色を抽出",
-        "title": "キャンバスから色を抽出"
       },
       "warp": {
         "label": "ワープ",

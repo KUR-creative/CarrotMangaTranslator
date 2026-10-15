@@ -37,6 +37,19 @@
     "search": "搜尋選項",
     "noResults": "沒有符合的選項。"
   },
+  "colorPicker": {
+    "open": "選擇{{label}}",
+    "saturationValue": "飽和度與亮度",
+    "saturationValueText": "飽和度 {{saturation}}%，亮度 {{brightness}}%",
+    "hue": "色相",
+    "eyedropper": "從螢幕取色",
+    "r": "紅",
+    "g": "綠",
+    "b": "藍",
+    "palette": "調色盤",
+    "addToPalette": "將目前顏色儲存到調色盤",
+    "swatchHint": "{{color}} — 按一下套用，右鍵或 Delete 刪除"
+  },
   "workSelect": {
     "search": "搜尋作品",
     "chapterCount": "{{count}}話",
@@ -1139,7 +1152,7 @@
       },
       "paint": {
         "label": "繪製工具",
-        "title": "筆刷、形狀與取色工具"
+        "title": "筆刷與形狀工具"
       },
       "restore": {
         "label": "還原工具",
@@ -1198,10 +1211,6 @@
       "eraser-rectangle": {
         "label": "矩形橡皮擦",
         "title": "拖曳以從原圖還原矩形區域"
-      },
-      "picker": {
-        "label": "取色",
-        "title": "從畫布取色"
       },
       "warp": {
         "label": "網格變形",

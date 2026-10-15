@@ -9,7 +9,6 @@ export type InpaintingTool =
   | "ellipse"
   | "eraser"
   | "eraser-rectangle"
-  | "picker"
   | "mask";
 
 export type BlockCounts = {

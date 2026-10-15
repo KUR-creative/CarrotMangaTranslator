@@ -369,7 +369,6 @@ function isManualInpaintingTool(
     "ellipse",
     "eraser",
     "eraser-rectangle",
-    "picker",
   ].includes(tool);
 }
 

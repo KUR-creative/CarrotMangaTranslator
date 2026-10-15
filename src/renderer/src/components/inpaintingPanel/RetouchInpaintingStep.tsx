@@ -2,7 +2,9 @@ import React from "react";
 import type { TFunction } from "i18next";
 import { useTranslation } from "react-i18next";
 import type { RetouchTool } from "../../lib/stageTool";
+import { ColorField } from "../ColorField";
 import { Button } from "../ui/Button";
+import { ColorPaletteSwatches } from "../ui/ColorPaletteSwatches";
 import { RangeInput } from "../ui/Field";
 import { useWorkspacePreference } from "../../hooks/useWorkspacePreference";
 import {
@@ -122,22 +124,21 @@ function RetouchColorControl({
   const accessibleLabel = `${activeToolLabel} ${t("format.color")}`;
 
   return (
-    <label className="retouch-color-control">
+    <div className="retouch-color-control">
       <span className="retouch-color-label">{t("format.color")}</span>
-      <span className="retouch-color-picker">
-        <input
-          className="retouch-color-input"
-          type="color"
-          aria-label={accessibleLabel}
-          value={brushColor}
-          disabled={disabled}
-          onChange={(event) => onBrushColorChange(event.target.value)}
-        />
-        <span className="retouch-color-details">
-          <code>{brushColor.toUpperCase()}</code>
-        </span>
-      </span>
-    </label>
+      <ColorField
+        label={accessibleLabel}
+        labelHidden
+        value={brushColor}
+        disabled={disabled}
+        onChange={onBrushColorChange}
+      />
+      <ColorPaletteSwatches
+        value={brushColor}
+        disabled={disabled}
+        onSelect={onBrushColorChange}
+      />
+    </div>
   );
 }
 

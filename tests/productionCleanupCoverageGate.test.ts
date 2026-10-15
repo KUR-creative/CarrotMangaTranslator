@@ -566,7 +566,7 @@ describe("production cleanup coverage floor gate", () => {
     expect(Object.keys(manifest.floors)).toEqual(scope.existing);
     expect(Object.keys(manifest.introducedFloors)).toEqual(scope.added);
     expect(manifest.deletedFiles).toEqual(scope.deleted);
-    expect(scope.existing).toHaveLength(851);
+    expect(scope.existing).toHaveLength(852);
     // Includes global chat, shared actions, OpenCode help, MCP event streams, shared
     // translation instructions and image budget; inherited floors remain unchanged.
     // inherited floors remain unchanged.
@@ -575,7 +575,9 @@ describe("production cleanup coverage floor gate", () => {
     // Issue #149 introduces timing, multi-folder import and preference/disclosure owners.
     // Issue #151 adds environment collection, execution diagnostics and context bounds;
     // six newly touched existing report modules retain the original measured floors.
-    expect(scope.added).toHaveLength(1469);
+    // Issue #150 adds the in-app color picker, its pacing and the shared palette;
+    // the newly touched cssColor module keeps its original measured floor.
+    expect(scope.added).toHaveLength(1475);
     expect(scope.deleted).toHaveLength(12);
   });
 });
