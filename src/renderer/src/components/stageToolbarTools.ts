@@ -1,6 +1,8 @@
 import {
   IconBoxOff,
   IconBrush,
+  IconRubberStamp,
+  IconBandage,
   IconColorPicker,
   IconEraser,
   IconHandStop,
@@ -34,6 +36,8 @@ const TOOL_ENTRIES: StageToolbarToolEntry[] = [
   toolEntry("brush", IconBrush),
   toolEntry("rectangle", IconRectangle),
   toolEntry("ellipse", IconOval),
+  toolEntry("clone", IconRubberStamp),
+  toolEntry("heal", IconBandage),
   toolEntry("eraser", IconEraser),
   toolEntry("eraser-rectangle", IconBoxOff),
   // Shortcut-only: listed so the current-tool label can name it, but kept out
@@ -58,7 +62,7 @@ export const STAGE_TOOL_GROUPS: StageToolbarToolGroup[] = [
     id: "paint",
     labelKey: "stageToolbar.groups.paint.label",
     showSwatch: true,
-    tools: resolveTools(["brush", "rectangle", "ellipse"]),
+    tools: resolveTools(["brush", "rectangle", "ellipse", "clone", "heal"]),
   },
   {
     defaultTool: "eraser",

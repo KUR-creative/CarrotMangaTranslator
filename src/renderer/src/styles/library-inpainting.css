@@ -918,6 +918,75 @@
   min-width: 0;
 }
 
+/* Stacked brush sliders share label and value columns so the tracks line up. */
+.retouch-slider-stack {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: var(--sp-3) var(--sp-2);
+  min-width: 0;
+}
+
+.retouch-slider-stack > .brush-size-control {
+  grid-column: 1 / -1;
+  grid-template-columns: subgrid;
+}
+
+.retouch-sample-options {
+  display: grid;
+  gap: var(--sp-3);
+  min-width: 0;
+  padding-top: var(--sp-3);
+  border-top: 1px solid var(--border-soft);
+}
+
+.retouch-sample-source {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-2);
+  min-width: 0;
+}
+
+.retouch-sample-source-status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  min-width: 0;
+  font-size: var(--font-sm);
+  color: var(--text-dim);
+}
+
+.retouch-sample-source-status i {
+  flex: 0 0 auto;
+  width: 8px;
+  height: 8px;
+  border: 1.5px solid var(--text-muted);
+  border-radius: 999px;
+}
+
+.retouch-sample-source[data-source-state="set"]
+  .retouch-sample-source-status
+  i {
+  border-color: var(--canvas-transform-accent);
+  background: var(--canvas-transform-accent);
+}
+
+.retouch-sample-source[data-source-state="picking"]
+  .retouch-sample-source-status {
+  color: var(--text);
+}
+
+.retouch-sample-source[data-source-state="picking"]
+  .retouch-sample-source-status
+  i {
+  border-color: var(--canvas-transform-accent);
+  border-style: dashed;
+}
+
+.retouch-sample-source .retouch-sample-source-status + * {
+  flex: 0 0 auto;
+}
+
 .retouch-color-control {
   display: grid;
   gap: var(--sp-2);

@@ -24,6 +24,11 @@ const SIDEBAR_LIBRARY_SPLIT_RANGE = { min: 0.05, max: 0.95 } as const;
 export type SidebarCollapsedPanel = "library" | "pages" | null;
 
 export type WorkspacePreferences = {
+  stampSource: "current" | "original";
+  stampAligned: boolean;
+  stampOpacity: number;
+  cloneHardness: number;
+  healHardness: number;
   inpaintingBrushRadius: number;
   inpaintingPaintColor: string;
   colorPalette: readonly string[];
@@ -50,6 +55,11 @@ export type WorkspacePreferences = {
 export type WorkspacePreferenceKey = keyof WorkspacePreferences;
 
 export const DEFAULT_WORKSPACE_PREFERENCES: Readonly<WorkspacePreferences> = {
+  stampSource: "current",
+  stampAligned: true,
+  stampOpacity: 100,
+  cloneHardness: 100,
+  healHardness: 50,
   inpaintingBrushRadius: 28,
   inpaintingPaintColor: "#ffffff",
   colorPalette: ["#ffffff", "#000000", "#808080"],
@@ -79,6 +89,11 @@ type PreferenceNormalizers = {
 };
 
 const NORMALIZERS: PreferenceNormalizers = {
+  stampSource: (value) => normalizeChoice(value, ["current", "original"]),
+  stampAligned: normalizeBoolean,
+  stampOpacity: (value) => normalizeInteger(value, { min: 1, max: 100 }),
+  cloneHardness: (value) => normalizeInteger(value, { min: 0, max: 100 }),
+  healHardness: (value) => normalizeInteger(value, { min: 0, max: 100 }),
   inpaintingBrushRadius: (value) =>
     normalizeInteger(value, RETOUCH_BRUSH_RADIUS_RANGE),
   inpaintingPaintColor: (value) =>

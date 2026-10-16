@@ -1224,6 +1224,14 @@
       "warp": {
         "label": "ワープ",
         "title": "格子点を動かして文字の形を調整します"
+      },
+      "clone": {
+        "label": "コピースタンプ",
+        "title": "コピースタンプ — Alt+クリックでコピー元を指定してドラッグ"
+      },
+      "heal": {
+        "label": "修復ブラシ",
+        "title": "修復ブラシ — Alt+クリックでコピー元を指定し、ドラッグで周囲になじませます"
       }
     }
   },
@@ -1679,7 +1687,9 @@
       "eraser-rectangle": "矩形復元",
       "mask": "マスクブラシ",
       "none": "ツールを選択してください",
-      "picker": "スポイト"
+      "picker": "スポイト",
+      "clone": "コピースタンプ",
+      "heal": "修復ブラシ"
     },
     "auto": {
       "description": "まず原文の文字を自動で消します。1ページずつ、または残りのページをまとめて処理できます。",
@@ -1733,6 +1743,28 @@
     "progress": {
       "processingPages": "{{count}}ページを処理中",
       "inProgress": "インペインティング処理中"
+    },
+    "stamp": {
+      "source": "サンプル",
+      "current": "現在の結果",
+      "original": "ページ原本",
+      "currentTooltip": "いま表示されている補正結果からコピーします。テキストレイヤーは含みません。",
+      "originalTooltip": "補正前の元のページからコピーします。",
+      "aligned": "調整あり",
+      "alignedTooltip": "オン：ソース位置がブラシに合わせて移動し続けます。オフ：ストロークごとに最初に指定した位置からコピーし直します。",
+      "opacity": "不透明度",
+      "hardness": "硬さ",
+      "pick": "ソースを指定",
+      "repick": "再指定",
+      "sourceState": {
+        "unset": "ソース未指定",
+        "set": "ソース指定済み",
+        "picking": "画像をクリックしてソースを指定"
+      },
+      "processing": "適用中… Escでキャンセル",
+      "keys": "Alt+クリック：ソース指定 · Shift：直線 · [ ]：サイズ · Esc：キャンセル",
+      "cursorHintFirst": "クリックでコピー元を指定",
+      "cursorHintReplace": "クリックでコピー元を変更"
     }
   },
   "settings": {

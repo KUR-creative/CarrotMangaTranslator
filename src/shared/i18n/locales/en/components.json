@@ -1224,6 +1224,14 @@
       "warp": {
         "label": "Warp",
         "title": "Warp text by moving grid points"
+      },
+      "clone": {
+        "label": "Clone stamp",
+        "title": "Clone stamp — Alt-click a source, then drag"
+      },
+      "heal": {
+        "label": "Healing brush",
+        "title": "Healing brush — Alt-click a source, then drag to blend it into the surroundings"
       }
     }
   },
@@ -1679,7 +1687,9 @@
       "eraser-rectangle": "Rectangle restore",
       "mask": "Mask brush",
       "none": "Select a tool",
-      "picker": "Color picker"
+      "picker": "Color picker",
+      "clone": "Clone stamp",
+      "heal": "Healing brush"
     },
     "auto": {
       "description": "First, erase the source text automatically. Process one page or all remaining pages at once.",
@@ -1733,6 +1743,28 @@
     "progress": {
       "processingPages": "Processing pages: {{count}}",
       "inProgress": "Inpainting in progress"
+    },
+    "stamp": {
+      "source": "Sample",
+      "current": "Current result",
+      "original": "Page original",
+      "currentTooltip": "Copy from the retouched image you see now. Text layers are not included.",
+      "originalTooltip": "Copy from the page before any retouching.",
+      "aligned": "Aligned",
+      "alignedTooltip": "On: the source follows the brush across strokes. Off: every stroke starts again from the point you set.",
+      "opacity": "Opacity",
+      "hardness": "Hardness",
+      "pick": "Set source",
+      "repick": "Set again",
+      "sourceState": {
+        "unset": "No source set",
+        "set": "Source set",
+        "picking": "Click the image to set the source"
+      },
+      "processing": "Applying… Esc to cancel",
+      "keys": "Alt-click: set source · Shift: straight line · [ ]: size · Esc: cancel",
+      "cursorHintFirst": "Click to set the source",
+      "cursorHintReplace": "Click to move the source"
     }
   },
   "settings": {

@@ -412,7 +412,7 @@ describe("unified workspace toolbar", () => {
     const group = retouch?.closest(".stage-toolbar-group-control");
     fireEvent.pointerEnter(retouch as HTMLButtonElement);
     const menu = screen.getByRole("menu");
-    expect(screen.getAllByRole("menuitemradio")).toHaveLength(3);
+    expect(screen.getAllByRole("menuitemradio")).toHaveLength(5);
 
     fireEvent.pointerLeave(group as HTMLElement);
     fireEvent.pointerEnter(menu);

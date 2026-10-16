@@ -1,4 +1,8 @@
 import React from "react";
+import {
+  SampledRetouchSliders,
+  SampledRetouchSourceControls,
+} from "./SampledRetouchSettings";
 import type { TFunction } from "i18next";
 import { useTranslation } from "react-i18next";
 import type { RetouchTool } from "../../lib/stageTool";
@@ -80,23 +84,34 @@ function RetouchToolSettings({
   tool,
 }: RetouchInpaintingStepProps): React.JSX.Element {
   const { t } = useTranslation("components");
+  const sampledTool = tool === "clone" || tool === "heal" ? tool : null;
+  const sizeControl =
+    tool === "brush" || tool === "eraser" || tool === "mask" || sampledTool ? (
+      <label className="brush-size-control">
+        <span className="brush-size-label">{t("format.size")}</span>
+        <RangeInput
+          min={RETOUCH_BRUSH_RADIUS_RANGE.min}
+          max={RETOUCH_BRUSH_RADIUS_RANGE.max}
+          value={brushRadius}
+          disabled={false}
+          onChange={(event) => onBrushRadiusChange(Number(event.target.value))}
+        />
+        <strong>{brushRadius}px</strong>
+      </label>
+    ) : null;
   return (
     <div className="retouch-tool-settings">
-      {tool === "brush" || tool === "eraser" || tool === "mask" ? (
-        <label className="brush-size-control">
-          <span className="brush-size-label">{t("format.size")}</span>
-          <RangeInput
-            min={RETOUCH_BRUSH_RADIUS_RANGE.min}
-            max={RETOUCH_BRUSH_RADIUS_RANGE.max}
-            value={brushRadius}
-            disabled={false}
-            onChange={(event) =>
-              onBrushRadiusChange(Number(event.target.value))
-            }
-          />
-          <strong>{brushRadius}px</strong>
-        </label>
-      ) : null}
+      {sampledTool ? (
+        <>
+          <div className="retouch-slider-stack">
+            {sizeControl}
+            <SampledRetouchSliders tool={sampledTool} />
+          </div>
+          <SampledRetouchSourceControls />
+        </>
+      ) : (
+        sizeControl
+      )}
       {colorTool ? (
         <RetouchColorControl
           activeToolLabel={activeToolLabel}
