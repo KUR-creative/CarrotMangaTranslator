@@ -337,8 +337,8 @@
       "reason": "Retained source-format outputs reuse native saved-name evidence for publication, reissue and streaming; encrypted reconstruction tests preserve legacy raster, PSD, ZIP and working-file bindings. The measured exchange adapters reuse the existing text/context policy, locked native storage, exact source fingerprints and typed errors. The exact direct dependency or consumer list and regression evidence are recorded in docs/mcp-exchange-gates-20260923.json. Global and legacy budgets remain unchanged."
     },
     "src/main/mcp/mcpTextExportSource.ts": {
-      "maxRuntimeImports": 13,
-      "reason": "The text export source adapter directly combines canonical block order, shared TXT/TSV serializers, language normalization, saved revisions, the locked native library and settings. Its 13 measured runtime imports preserve source validation without a forwarding wrapper. Exact edges and native retention tests are recorded in docs/mcp-exchange-gates-20260923.json."
+      "maxRuntimeImports": 14,
+      "reason": "The text export source adapter directly combines canonical block order, shared TXT/TSV serializers, language normalization, saved revisions, the locked native library and settings. Its 13 measured runtime imports preserve source validation without a forwarding wrapper. Exact edges and native retention tests are recorded in docs/mcp-exchange-gates-20260923.json. Issue #155 follow-up adds one direct dependency on the versioned shared TXT codec (gatherTextFile) to preserve stable block identity and internal blank lines. The measured import count is 14; no forwarding wrapper or global limit change. Existing source-binding, mutation, native-order and file parity tests remain in mcpTextExchangeSource.test.ts; see docs/text-exchange-fixes.md."
     },
     "src/main/settingsStore.ts": {
       "maxImportedBy": 31,

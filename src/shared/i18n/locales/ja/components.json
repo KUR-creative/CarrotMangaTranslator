@@ -1398,14 +1398,15 @@
     "toggleOn": "オン",
     "toggleOff": "オフ",
     "importTxt": {
-      "button": ".txtを読み込む",
-      "title": "翻訳文のみの形式で保存したTXTから、行順に翻訳文を再読み込みします。",
+      "button": "翻訳文TXTを読み込む",
+      "title": "新しいTXTは保存した識別情報を使用します。旧形式は内容に合う形式を選んでください。",
       "noChanges": "変更された翻訳文はありません。",
       "noApplicableText": "適用できるテキストがありません。警告を確認してください。",
-      "confirm": "{{count}}件の翻訳文をTXTの内容で上書きしますか？\n行順に適用され、OCR原文は変更されません。",
+      "confirm": "{{count}}件の翻訳をTXTの内容に置き換えますか？OCR原文は保持されます。",
       "updated": "{{count}}ブロックの翻訳文を更新しました。",
       "warnings": "TXTの読み込みに{{count}}件の警告があります。",
-      "failed": "TXTファイルを読み込めませんでした。"
+      "failed": "TXTファイルを読み込めませんでした。",
+      "bothButton": "原文＋翻訳TXTを読み込む"
     },
     "review": {
       "title": "校正表",

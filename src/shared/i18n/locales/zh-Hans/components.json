@@ -1398,14 +1398,15 @@
     "toggleOn": "开启",
     "toggleOff": "关闭",
     "importTxt": {
-      "button": "导入.txt",
-      "title": "按行顺序从仅译文格式的TXT文件重新导入译文。",
+      "button": "导入译文 TXT",
+      "title": "新 TXT 使用保存的标识信息。旧文件请选择对应的文本格式。",
       "noChanges": "没有已更改的译文。",
       "noApplicableText": "没有可应用的文本，请检查警告。",
-      "confirm": "要用TXT内容覆盖{{count}}条译文吗？\n文本将按行顺序应用，OCR原文不会改变。",
+      "confirm": "将 {{count}} 条译文替换为 TXT 内容？OCR 原文将保留。",
       "updated": "已更新{{count}}个文本块的译文。",
       "warnings": "TXT导入有{{count}}条警告。",
-      "failed": "无法导入TXT文件。"
+      "failed": "无法导入TXT文件。",
+      "bothButton": "导入原文＋译文 TXT"
     },
     "review": {
       "title": "校对表",

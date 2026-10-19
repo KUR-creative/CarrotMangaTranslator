@@ -1398,14 +1398,15 @@
     "toggleOn": "開啟",
     "toggleOff": "關閉",
     "importTxt": {
-      "button": "匯入 .txt",
-      "title": "依行序從僅含譯文的 TXT 檔案重新匯入譯文。",
+      "button": "匯入譯文 TXT",
+      "title": "新 TXT 使用儲存的識別資訊。舊檔案請選擇對應的文字格式。",
       "noChanges": "沒有已更改的譯文。",
       "noApplicableText": "沒有可套用的文字，請檢查警告。",
-      "confirm": "要用 TXT 內容覆寫{{count}}筆譯文嗎？\n文字將依行序套用，OCR 原文不會變更。",
+      "confirm": "將 {{count}} 條譯文替換為 TXT 內容？OCR 原文將保留。",
       "updated": "已更新{{count}}個文字區塊的譯文。",
       "warnings": "TXT 匯入有{{count}}則警告。",
-      "failed": "無法匯入 TXT 檔案。"
+      "failed": "無法匯入 TXT 檔案。",
+      "bothButton": "匯入原文＋譯文 TXT"
     },
     "review": {
       "title": "校對表",

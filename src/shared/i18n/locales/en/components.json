@@ -1398,14 +1398,15 @@
     "toggleOn": "On",
     "toggleOff": "Off",
     "importTxt": {
-      "button": "Import .txt",
-      "title": "Re-import translations from a translation-only TXT file in line order.",
+      "button": "Import translation TXT",
+      "title": "New TXT files use saved identities. For legacy files, select the matching text format.",
       "noChanges": "There are no changed translations.",
       "noApplicableText": "No text can be applied. Check the warnings.",
-      "confirm": "Translations to overwrite: {{count}}. Continue with the TXT contents?\nLines are applied in order, and OCR source text is not changed.",
+      "confirm": "Replace {{count}} translations with the TXT contents? OCR source text is preserved.",
       "updated": "Updated translation blocks: {{count}}.",
       "warnings": "TXT import warnings: {{count}}.",
-      "failed": "Could not import the TXT file."
+      "failed": "Could not import the TXT file.",
+      "bothButton": "Import source + translation TXT"
     },
     "review": {
       "title": "Review table",
