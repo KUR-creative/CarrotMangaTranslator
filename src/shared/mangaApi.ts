@@ -134,6 +134,7 @@ import type {
 import type { CodexAccountSnapshot } from "./codexAccountTypes";
 import type { ChatApi } from "./chatTypes";
 import type { ClaudeApi } from "./claudeTypes";
+import type { GrokApi } from "./grokTypes";
 import type {
   FinishPageTimingSessionRequest,
   FinishPageTimingSessionResult,
@@ -192,12 +193,14 @@ type McpApi = {
       | "claude"
       | "claude-code"
       | "opencode"
+      | "grok"
+      | "grok-build"
       | "generic",
   ) => Promise<{ completed: boolean }>;
   copyMcpUrl: () => Promise<{ completed: boolean }>;
 };
 
-export interface MangaApi extends McpApi, ChatApi, ClaudeApi {
+export interface MangaApi extends McpApi, ChatApi, ClaudeApi, GrokApi {
   discardEnvironmentBackup: (id: string) => Promise<null>;
   getEnvironmentRestoreReceipt: () => Promise<
     import("./environmentBackup").BackupStatus["restored"]

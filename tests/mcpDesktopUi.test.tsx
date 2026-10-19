@@ -418,6 +418,58 @@ it("copies OpenCode-only settings and explains generic HTTP OAuth without a shar
   await waitFor(() => expect(openMcpHelp).toHaveBeenCalledWith("generic"));
 });
 
+it("connects Grok web and Build through their own help routes and copies the live CLI address", async () => {
+  const copy = vi.fn<(text: string) => Promise<void>>().mockResolvedValue();
+  const openMcpHelp = vi.fn(async () => ({ completed: true }));
+  window.mangaApi = createTestMangaGatewayStub({ openMcpHelp });
+  Object.defineProperty(navigator, "clipboard", {
+    configurable: true,
+    value: { writeText: copy },
+  });
+  show();
+  fireEvent.click(screen.getByRole("button", { name: "연결 방법 및 도움말" }));
+  fireEvent.click(screen.getByRole("tab", { name: "Grok 웹" }));
+  expect(screen.getByText(/OAuth 인증/)).toBeTruthy();
+  expect(screen.getByText(/맞춤 모드\(Custom\)/)).toBeTruthy();
+  expect(screen.queryByRole("button", { name: "명령 복사" })).toBeNull();
+  fireEvent.click(screen.getByRole("button", { name: "Grok 커넥터 열기" }));
+  await waitFor(() => expect(openMcpHelp).toHaveBeenCalledWith("grok"));
+  fireEvent.keyDown(screen.getByRole("tab", { name: "Grok 웹" }), {
+    key: "ArrowRight",
+  });
+  expect(
+    screen
+      .getByRole("tab", { name: "Grok Build" })
+      .getAttribute("aria-selected"),
+  ).toBe("true");
+  fireEvent.click(screen.getByRole("button", { name: "명령 복사" }));
+  await waitFor(() =>
+    expect(copy).toHaveBeenCalledWith(
+      'grok mcp add --transport http carrot "https://carrot.tail-test.ts.net/mcp"\ngrok mcp list',
+    ),
+  );
+  expect(screen.getByText(/grok mcp doctor carrot/)).toBeTruthy();
+  fireEvent.click(screen.getByRole("button", { name: "Grok Build 연결 문서" }));
+  await waitFor(() => expect(openMcpHelp).toHaveBeenCalledWith("grok-build"));
+});
+
+it("does not offer Grok commands without a server address and disables actions while busy", () => {
+  const view = show({ ...status(), state: "off", url: null });
+  fireEvent.click(screen.getByRole("tab", { name: "Grok Build" }));
+  expect(screen.queryByRole("button", { name: "명령 복사" })).toBeNull();
+  fireEvent.click(screen.getByRole("tab", { name: "Grok 웹" }));
+  expect(screen.getByText("MCP를 켜면 표시됩니다.")).toBeTruthy();
+  view.unmount();
+  show(status(), true);
+  fireEvent.click(screen.getByRole("button", { name: "연결 방법 및 도움말" }));
+  fireEvent.click(screen.getByRole("tab", { name: "Grok Build" }));
+  for (const name of ["명령 복사", "Grok Build 연결 문서"]) {
+    expect(screen.getByRole("button", { name }).hasAttribute("disabled")).toBe(
+      true,
+    );
+  }
+});
+
 it("shows the actual OAuth callback next to the unverified client name", () => {
   const current = status();
   const redirectUri = "http://127.0.0.1:19876/mcp/oauth/callback";

@@ -579,7 +579,8 @@ describe("production cleanup coverage floor gate", () => {
     // the newly touched cssColor module keeps its original measured floor.
     // Issue #149 adds the resizable left rail: its splitter primitive and owners.
     // Sampled retouch adds worker, raster, gesture and shared contract owners.
-    expect(scope.added).toHaveLength(1497);
+    // Grok web and Build share a dedicated MCP connection guide.
+    expect(scope.added).toHaveLength(1518);
     expect(scope.deleted).toHaveLength(12);
   });
 });

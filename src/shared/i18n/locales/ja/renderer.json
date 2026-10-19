@@ -558,6 +558,7 @@
         "shareExport": "共有ファイルを作成",
         "modelTest": "モデルとランタイムを確認",
         "codexAuth": "ChatGPTアカウント接続",
+        "grokAuth": "Grok アカウント接続",
         "background": "バックグラウンド処理",
         "environmentBackup": "バックアップを書き出す",
         "environmentRestore": "バックアップを読み込む",
@@ -596,6 +597,7 @@
         "model-test-checking": "モデルの応答を確認中…",
         "codex-auth-opening-browser": "ログインページを開いています…",
         "codex-auth-updating": "アカウント接続を更新中…",
+        "cli-downloading": "AI ランタイムをダウンロード中…",
         "waiting-for-user": "ブラウザーでのログインを待機中…"
       },
       "status": {

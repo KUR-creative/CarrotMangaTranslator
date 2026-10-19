@@ -2,6 +2,7 @@ import { chapterPageIpcContracts } from "./ipcChapterPageContracts";
 import { mcpIpcContracts } from "./ipcMcpContracts";
 import { chatIpcContracts } from "./ipcChatContracts";
 import { claudeIpcContracts } from "./ipcClaudeContracts";
+import { grokIpcContracts } from "./ipcGrokContracts";
 import { environmentBackupIpcContracts } from "./ipcEnvironmentBackupContracts";
 import type { IpcContract, IpcEventContract } from "./ipcContractCore";
 import { pageWorkflowIpcContracts } from "./ipcPageWorkflowContracts";
@@ -57,6 +58,7 @@ export {
 
 export const ipcInvokeContracts = {
   ...claudeIpcContracts,
+  ...grokIpcContracts,
   ...chatIpcContracts,
   ...mcpIpcContracts,
   ...environmentBackupIpcContracts,

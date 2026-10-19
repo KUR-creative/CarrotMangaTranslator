@@ -2562,6 +2562,34 @@
       "effort": "추론 수준",
       "error": "Claude 연결을 확인해 주세요.",
       "testing": "Claude Code 연결과 모델 응답을 확인합니다."
+    },
+    "accountRuntime": {
+      "missingTitle": "{{name}} 실행 파일이 아직 없습니다",
+      "missingDetail": "처음 연결할 때 공식 {{name}} 실행 파일을 한 번만 내려받아 이 PC에 보관합니다. 이후 연결과 작업에는 보관된 파일을 그대로 사용합니다.",
+      "downloading": "내려받는 중…",
+      "downloadFailed": "{{name}} 실행 파일을 내려받지 못했습니다",
+      "connectFailed": "{{name}} 연결을 완료하지 못했습니다",
+      "retryHint": "같은 버튼을 다시 눌러 다시 시도할 수 있습니다.",
+      "claudeLogin": "내려받고 로그인",
+      "claudeLoginRetry": "다시 내려받고 로그인",
+      "claudeConsole": "내려받고 API 계정 연결",
+      "claudeConsoleRetry": "다시 내려받고 API 계정 연결",
+      "codexLogin": "내려받고 ChatGPT로 로그인",
+      "codexLoginRetry": "다시 내려받고 ChatGPT로 로그인",
+      "grokLogin": "내려받고 Grok 로그인",
+      "grokLoginRetry": "다시 내려받고 Grok 로그인"
+    },
+    "grok": {
+      "title": "앱 채팅 · Grok 계정",
+      "description": "앱 안의 채팅에서 Grok을 대화 상대로 사용합니다. Grok은 Carrot 도구로 보관함을 읽고 번역·편집합니다. 이 탭의 외부 AI 앱 연결(MCP)과는 별개이며, 로그인과 인증 정보는 공식 Grok Build가 관리합니다.",
+      "checking": "계정 상태 확인 중…",
+      "signedOut": "로그인되지 않음",
+      "connected": "Grok 연결됨",
+      "connectedVersion": "Grok 연결됨 · Grok Build {{version}}",
+      "login": "Grok 로그인",
+      "logout": "로그아웃",
+      "refresh": "새로고침",
+      "error": "Grok 연결을 확인해 주세요."
     }
   },
   "pageBlocks": {
@@ -2637,6 +2665,7 @@
         "environment-restore": "환경 복원",
         "model-test": "모델 확인",
         "codex-auth": "ChatGPT 계정",
+        "grok-auth": "Grok Build",
         "sound-effect-translation": "효과음 번역",
         "claude-auth": "Claude Code"
       },
@@ -3263,6 +3292,14 @@
     "runtime": "AI",
     "claudeLoginHint": "Claude에 로그인하면 채팅을 시작할 수 있습니다.",
     "claudeLogin": "Claude 로그인",
+    "claudeDownloadLogin": "내려받고 Claude 로그인",
+    "claudeDownloadLoginRetry": "다시 내려받고 Claude 로그인",
+    "grokLogin": "Grok 로그인",
+    "grokDownloadLogin": "내려받고 Grok 로그인",
+    "grokDownloadLoginRetry": "다시 내려받고 Grok 로그인",
+    "grokLoginHint": "Grok에 로그인하면 채팅을 시작할 수 있습니다.",
+    "downloadLogin": "내려받고 ChatGPT 로그인",
+    "downloadLoginRetry": "다시 내려받고 ChatGPT 로그인",
     "moreImages": "이미지 {{count}}개 더 보기"
   }
 }

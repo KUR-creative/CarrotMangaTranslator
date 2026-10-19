@@ -22460,6 +22460,28 @@
         "pct": 100
       }
     },
+    "src/main/chat/grokChatRuntime.ts": {
+      "lines": {
+        "covered": 105,
+        "total": 111,
+        "pct": 94.59
+      },
+      "statements": {
+        "covered": 110,
+        "total": 123,
+        "pct": 89.43
+      },
+      "functions": {
+        "covered": 17,
+        "total": 18,
+        "pct": 94.44
+      },
+      "branches": {
+        "covered": 57,
+        "total": 70,
+        "pct": 81.42
+      }
+    },
     "src/main/claude/claudeAccount.ts": {
       "lines": {
         "covered": 0,
@@ -23448,6 +23470,72 @@
         "covered": 34,
         "total": 39,
         "pct": 87.17
+      }
+    },
+    "src/main/grok/grokAccount.ts": {
+      "lines": {
+        "covered": 27,
+        "total": 27,
+        "pct": 100
+      },
+      "statements": {
+        "covered": 29,
+        "total": 29,
+        "pct": 100
+      },
+      "functions": {
+        "covered": 6,
+        "total": 6,
+        "pct": 100
+      },
+      "branches": {
+        "covered": 14,
+        "total": 14,
+        "pct": 100
+      }
+    },
+    "src/main/grok/grokAcpClient.ts": {
+      "lines": {
+        "covered": 61,
+        "total": 69,
+        "pct": 88.4
+      },
+      "statements": {
+        "covered": 68,
+        "total": 82,
+        "pct": 82.92
+      },
+      "functions": {
+        "covered": 15,
+        "total": 19,
+        "pct": 78.94
+      },
+      "branches": {
+        "covered": 25,
+        "total": 36,
+        "pct": 69.44
+      }
+    },
+    "src/main/grok/grokRuntime.ts": {
+      "lines": {
+        "covered": 26,
+        "total": 26,
+        "pct": 100
+      },
+      "statements": {
+        "covered": 27,
+        "total": 27,
+        "pct": 100
+      },
+      "functions": {
+        "covered": 6,
+        "total": 6,
+        "pct": 100
+      },
+      "branches": {
+        "covered": 10,
+        "total": 12,
+        "pct": 83.33
       }
     },
     "src/main/imageFingerprint.ts": {
@@ -24770,6 +24858,28 @@
         "pct": 0
       }
     },
+    "src/main/ipc/cliAccountProgress.ts": {
+      "lines": {
+        "covered": 3,
+        "total": 3,
+        "pct": 100
+      },
+      "statements": {
+        "covered": 3,
+        "total": 3,
+        "pct": 100
+      },
+      "functions": {
+        "covered": 3,
+        "total": 3,
+        "pct": 100
+      },
+      "branches": {
+        "covered": 0,
+        "total": 0,
+        "pct": 100
+      }
+    },
     "src/main/ipc/codexAccountIpc.ts": {
       "lines": {
         "total": 68,
@@ -24829,6 +24939,28 @@
         "covered": 0,
         "total": 8,
         "pct": 0
+      },
+      "branches": {
+        "covered": 0,
+        "total": 0,
+        "pct": 100
+      }
+    },
+    "src/main/ipc/grokAccountIpc.ts": {
+      "lines": {
+        "covered": 11,
+        "total": 11,
+        "pct": 100
+      },
+      "statements": {
+        "covered": 11,
+        "total": 11,
+        "pct": 100
+      },
+      "functions": {
+        "covered": 8,
+        "total": 8,
+        "pct": 100
       },
       "branches": {
         "covered": 0,
@@ -36562,6 +36694,28 @@
         "pct": 78.57
       }
     },
+    "src/main/runtimeSupport/cliRuntimePlan.ts": {
+      "lines": {
+        "covered": 6,
+        "total": 6,
+        "pct": 100
+      },
+      "statements": {
+        "covered": 6,
+        "total": 6,
+        "pct": 100
+      },
+      "functions": {
+        "covered": 1,
+        "total": 1,
+        "pct": 100
+      },
+      "branches": {
+        "covered": 4,
+        "total": 4,
+        "pct": 100
+      }
+    },
     "src/main/runtimeSupport/directMlAdapterPolicy.ts": {
       "lines": {
         "covered": 10,
@@ -36604,6 +36758,28 @@
         "covered": 18,
         "total": 20,
         "pct": 90
+      }
+    },
+    "src/main/runtimeSupport/managedCliRuntime.ts": {
+      "lines": {
+        "covered": 78,
+        "total": 78,
+        "pct": 100
+      },
+      "statements": {
+        "covered": 87,
+        "total": 88,
+        "pct": 98.86
+      },
+      "functions": {
+        "covered": 15,
+        "total": 15,
+        "pct": 100
+      },
+      "branches": {
+        "covered": 45,
+        "total": 46,
+        "pct": 97.82
       }
     },
     "src/main/runtimeSupport/modelCleanupBarrier.ts": {
@@ -38059,6 +38235,50 @@
       }
     },
     "src/renderer/src/api/environmentBackupGateway.ts": {
+      "lines": {
+        "covered": 1,
+        "total": 1,
+        "pct": 100
+      },
+      "statements": {
+        "covered": 1,
+        "total": 1,
+        "pct": 100
+      },
+      "functions": {
+        "covered": 0,
+        "total": 0,
+        "pct": 100
+      },
+      "branches": {
+        "covered": 0,
+        "total": 0,
+        "pct": 100
+      }
+    },
+    "src/renderer/src/api/grokConnection.ts": {
+      "lines": {
+        "covered": 2,
+        "total": 2,
+        "pct": 100
+      },
+      "statements": {
+        "covered": 2,
+        "total": 2,
+        "pct": 100
+      },
+      "functions": {
+        "covered": 1,
+        "total": 1,
+        "pct": 100
+      },
+      "branches": {
+        "covered": 0,
+        "total": 0,
+        "pct": 100
+      }
+    },
+    "src/renderer/src/api/grokGateway.ts": {
       "lines": {
         "covered": 1,
         "total": 1,
@@ -42722,6 +42942,28 @@
         "pct": 62.56
       }
     },
+    "src/renderer/src/components/settingsModal/AccountRuntimeSetup.tsx": {
+      "lines": {
+        "covered": 8,
+        "total": 8,
+        "pct": 100
+      },
+      "statements": {
+        "covered": 9,
+        "total": 9,
+        "pct": 100
+      },
+      "functions": {
+        "covered": 1,
+        "total": 1,
+        "pct": 100
+      },
+      "branches": {
+        "covered": 9,
+        "total": 10,
+        "pct": 90
+      }
+    },
     "src/renderer/src/components/settingsModal/ApiKeyVisibilityButton.tsx": {
       "lines": {
         "total": 3,
@@ -42898,6 +43140,28 @@
         "pct": 100
       }
     },
+    "src/renderer/src/components/settingsModal/GrokAccountSection.tsx": {
+      "lines": {
+        "covered": 12,
+        "total": 13,
+        "pct": 92.3
+      },
+      "statements": {
+        "covered": 14,
+        "total": 15,
+        "pct": 93.33
+      },
+      "functions": {
+        "covered": 5,
+        "total": 6,
+        "pct": 83.33
+      },
+      "branches": {
+        "covered": 12,
+        "total": 14,
+        "pct": 85.71
+      }
+    },
     "src/renderer/src/components/settingsModal/ImageSettingsPanel.tsx": {
       "lines": {
         "covered": 0,
@@ -43071,6 +43335,28 @@
       "branches": {
         "covered": 16,
         "total": 16,
+        "pct": 100
+      }
+    },
+    "src/renderer/src/components/settingsModal/McpGrokGuide.tsx": {
+      "lines": {
+        "total": 2,
+        "covered": 2,
+        "pct": 100
+      },
+      "statements": {
+        "total": 2,
+        "covered": 2,
+        "pct": 100
+      },
+      "functions": {
+        "total": 2,
+        "covered": 2,
+        "pct": 100
+      },
+      "branches": {
+        "total": 4,
+        "covered": 4,
         "pct": 100
       }
     },
@@ -43424,6 +43710,28 @@
         "total": 32,
         "covered": 31,
         "pct": 96.87
+      }
+    },
+    "src/renderer/src/components/settingsModal/useCliAccountActions.ts": {
+      "lines": {
+        "covered": 24,
+        "total": 25,
+        "pct": 96
+      },
+      "statements": {
+        "covered": 25,
+        "total": 27,
+        "pct": 92.59
+      },
+      "functions": {
+        "covered": 5,
+        "total": 5,
+        "pct": 100
+      },
+      "branches": {
+        "covered": 30,
+        "total": 33,
+        "pct": 90.9
       }
     },
     "src/renderer/src/components/settingsModal/useEnvironmentBackup.ts": {
@@ -45054,6 +45362,28 @@
         "pct": 61.11
       }
     },
+    "src/renderer/src/features/chat/ChatLogin.tsx": {
+      "lines": {
+        "covered": 12,
+        "total": 13,
+        "pct": 92.3
+      },
+      "statements": {
+        "covered": 12,
+        "total": 13,
+        "pct": 92.3
+      },
+      "functions": {
+        "covered": 2,
+        "total": 3,
+        "pct": 66.66
+      },
+      "branches": {
+        "covered": 15,
+        "total": 22,
+        "pct": 68.18
+      }
+    },
     "src/renderer/src/features/chat/ChatMarkdown.tsx": {
       "lines": {
         "covered": 2,
@@ -45142,6 +45472,28 @@
         "pct": 8.45
       }
     },
+    "src/renderer/src/features/chat/chatRuntimes.ts": {
+      "lines": {
+        "covered": 2,
+        "total": 2,
+        "pct": 100
+      },
+      "statements": {
+        "covered": 2,
+        "total": 2,
+        "pct": 100
+      },
+      "functions": {
+        "covered": 0,
+        "total": 0,
+        "pct": 100
+      },
+      "branches": {
+        "covered": 0,
+        "total": 0,
+        "pct": 100
+      }
+    },
     "src/renderer/src/features/chat/useChat.ts": {
       "lines": {
         "covered": 45,
@@ -45206,6 +45558,28 @@
         "covered": 14,
         "total": 20,
         "pct": 70
+      }
+    },
+    "src/renderer/src/features/chat/useChatSignIn.ts": {
+      "lines": {
+        "covered": 16,
+        "total": 22,
+        "pct": 72.72
+      },
+      "statements": {
+        "covered": 16,
+        "total": 22,
+        "pct": 72.72
+      },
+      "functions": {
+        "covered": 4,
+        "total": 5,
+        "pct": 80
+      },
+      "branches": {
+        "covered": 3,
+        "total": 6,
+        "pct": 50
       }
     },
     "src/renderer/src/hooks/appOperationEventScheduler.ts": {
@@ -45360,6 +45734,28 @@
         "total": 21,
         "covered": 19,
         "pct": 90.47
+      }
+    },
+    "src/renderer/src/hooks/useAccountAuthOperation.ts": {
+      "lines": {
+        "covered": 26,
+        "total": 29,
+        "pct": 89.65
+      },
+      "statements": {
+        "covered": 27,
+        "total": 31,
+        "pct": 87.09
+      },
+      "functions": {
+        "covered": 9,
+        "total": 11,
+        "pct": 81.81
+      },
+      "branches": {
+        "covered": 19,
+        "total": 20,
+        "pct": 95
       }
     },
     "src/renderer/src/hooks/useAccountConnection.ts": {
@@ -46217,6 +46613,28 @@
       "branches": {
         "covered": 0,
         "total": 0,
+        "pct": 100
+      }
+    },
+    "src/renderer/src/lib/accountRuntimePresentation.ts": {
+      "lines": {
+        "covered": 6,
+        "total": 6,
+        "pct": 100
+      },
+      "statements": {
+        "covered": 8,
+        "total": 8,
+        "pct": 100
+      },
+      "functions": {
+        "covered": 2,
+        "total": 2,
+        "pct": 100
+      },
+      "branches": {
+        "covered": 12,
+        "total": 12,
         "pct": 100
       }
     },
@@ -48464,6 +48882,28 @@
         "pct": 73.52
       }
     },
+    "src/shared/grokTypes.ts": {
+      "lines": {
+        "covered": 0,
+        "total": 0,
+        "pct": 100
+      },
+      "statements": {
+        "covered": 0,
+        "total": 0,
+        "pct": 100
+      },
+      "functions": {
+        "covered": 0,
+        "total": 0,
+        "pct": 100
+      },
+      "branches": {
+        "covered": 0,
+        "total": 0,
+        "pct": 100
+      }
+    },
     "src/shared/imageEditingBudget.ts": {
       "lines": {
         "total": 7,
@@ -48870,6 +49310,28 @@
         "covered": 0,
         "total": 1,
         "pct": 0
+      },
+      "functions": {
+        "covered": 0,
+        "total": 0,
+        "pct": 100
+      },
+      "branches": {
+        "covered": 0,
+        "total": 0,
+        "pct": 100
+      }
+    },
+    "src/shared/ipcGrokContracts.ts": {
+      "lines": {
+        "covered": 2,
+        "total": 2,
+        "pct": 100
+      },
+      "statements": {
+        "covered": 2,
+        "total": 2,
+        "pct": 100
       },
       "functions": {
         "covered": 0,

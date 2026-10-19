@@ -15,8 +15,8 @@ import {
   ChatHistoryControls,
   ChatModelControls,
   ChatViewContext,
-  ChatLogin,
 } from "./ChatControls";
+import { ChatLogin } from "./ChatLogin";
 import styles from "./ChatPanel.module.css";
 
 const LIBRARY_CONTEXT: CurrentViewContext = {
@@ -54,7 +54,7 @@ export function ChatPanel(props: {
   return (
     <section className={styles.panel} aria-label={t("chat.open")}>
       {props.headerSlot ? createPortal(history, props.headerSlot) : history}
-      {!model.authenticated && <ChatLogin chat={chat} />}
+      {!model.authenticated && <ChatLogin chat={chat} model={model} />}
       {chat.error && (
         <div role="alert" className={styles.error}>
           {chat.error}

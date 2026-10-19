@@ -2562,6 +2562,34 @@
       "effort": "推理等級",
       "error": "無法連線至 Claude。",
       "testing": "檢查 Claude Code 連線與模型回應。"
+    },
+    "accountRuntime": {
+      "missingTitle": "尚未安裝 {{name}} 執行階段",
+      "missingDetail": "首次連線時會下載一次官方 {{name}} 執行階段並儲存在這台電腦上，之後的連線與工作會直接重複使用已儲存的檔案。",
+      "downloading": "正在下載…",
+      "downloadFailed": "無法下載 {{name}} 執行階段",
+      "connectFailed": "未能完成 {{name}} 連線",
+      "retryHint": "再次點按同一個按鈕即可重試。",
+      "claudeLogin": "下載並登入 Claude",
+      "claudeLoginRetry": "重新下載並登入 Claude",
+      "claudeConsole": "下載並登入 API 帳戶",
+      "claudeConsoleRetry": "重新下載並登入 API 帳戶",
+      "codexLogin": "下載並使用 ChatGPT 登入",
+      "codexLoginRetry": "重新下載並使用 ChatGPT 登入",
+      "grokLogin": "下載並登入 Grok",
+      "grokLoginRetry": "重新下載並登入 Grok"
+    },
+    "grok": {
+      "title": "應用程式內聊天 · Grok 帳戶",
+      "description": "在應用程式內的聊天中使用 Grok 作為助理。Grok 透過 Carrot 工具讀取資料庫並進行翻譯與編輯。這與本頁的外部 AI 應用程式（MCP）連線各自獨立，登入與認證資訊由官方 Grok Build 管理。",
+      "checking": "正在檢查帳戶…",
+      "signedOut": "尚未登入",
+      "connected": "已連線 Grok",
+      "connectedVersion": "已連線 Grok · Grok Build {{version}}",
+      "login": "登入 Grok",
+      "logout": "登出",
+      "refresh": "重新整理",
+      "error": "請檢查 Grok 連線。"
     }
   },
   "pageBlocks": {
@@ -2637,6 +2665,7 @@
         "environment-restore": "環境還原",
         "model-test": "模型檢查",
         "codex-auth": "ChatGPT 帳戶",
+        "grok-auth": "Grok Build",
         "sound-effect-translation": "音效翻譯",
         "claude-auth": "Claude Code"
       },
@@ -3263,6 +3292,14 @@
     "runtime": "AI",
     "claudeLoginHint": "請登入 Claude 帳戶。",
     "claudeLogin": "登入 Claude",
+    "claudeDownloadLogin": "下載並登入 Claude",
+    "claudeDownloadLoginRetry": "重新下載並登入 Claude",
+    "grokLogin": "登入 Grok",
+    "grokDownloadLogin": "下載並登入 Grok",
+    "grokDownloadLoginRetry": "重新下載並登入 Grok",
+    "grokLoginHint": "登入 Grok 後即可開始聊天。",
+    "downloadLogin": "下載並登入 ChatGPT",
+    "downloadLoginRetry": "重新下載並登入 ChatGPT",
     "moreImages": "再顯示 {{count}} 張圖片"
   }
 }

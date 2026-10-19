@@ -1,5 +1,17 @@
 # 코드 경계와 품질 규칙
 
+## 2026-10-19 Grok Build 채팅
+
+Grok 계정·채팅은 기존 IPC 검증, 계정 작업 registry, managed CLI 설치 및 당근 MCP
+경계를 재사용한다. IPC composition의 개별 소비 상한과 공식 ACP 이미지·도구·복원
+검증은 [Grok 연결 기록](grok-build-integration.md)에 남긴다. 전역 의존 예산과 기존
+커버리지 기준은 낮추지 않는다. 새 13개 파일은 실제 Windows focused coverage에서
+측정했다. 출처는 `.tmp/grok-integration-audit/coverage/coverage-summary.json`, 최초 측정
+SHA-256은 `805fe9c2cb6d276fc7572622ba186f8afe6c845fa63e127208e27d491de70f9a`다.
+공용 CLI 진행 표시와 정상 종료/강제 종료 후속 측정은
+`.tmp/grok-integration-audit/coverage-final/coverage-summary.json`, SHA-256
+`6d4ca6715a6648297922f76233bdb3db7d740e40692c8ae7b78f6eff4040555a`다.
+
 ## 2026-10-13 원문 언어 자동 기본값
 
 효과음 응답 검증도 shared `translationLanguages`의 명시적 일본어 판정을 사용한다.

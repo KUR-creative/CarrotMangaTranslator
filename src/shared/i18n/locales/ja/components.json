@@ -2562,6 +2562,34 @@
       "effort": "推論レベル",
       "error": "Claude に接続できませんでした。",
       "testing": "Claude Code の接続とモデルの応答を確認します。"
+    },
+    "accountRuntime": {
+      "missingTitle": "{{name}} ランタイムがまだありません",
+      "missingDetail": "初回接続時に公式の {{name}} ランタイムを一度だけダウンロードし、この PC に保存します。以降の接続や作業では保存したものをそのまま使います。",
+      "downloading": "ダウンロード中…",
+      "downloadFailed": "{{name}} ランタイムをダウンロードできませんでした",
+      "connectFailed": "{{name}} の接続を完了できませんでした",
+      "retryHint": "同じボタンをもう一度押すと再試行できます。",
+      "claudeLogin": "ダウンロードして Claude でログイン",
+      "claudeLoginRetry": "再ダウンロードして Claude でログイン",
+      "claudeConsole": "ダウンロードして API アカウントでログイン",
+      "claudeConsoleRetry": "再ダウンロードして API アカウントでログイン",
+      "codexLogin": "ダウンロードして ChatGPT でログイン",
+      "codexLoginRetry": "再ダウンロードして ChatGPT でログイン",
+      "grokLogin": "ダウンロードして Grok でログイン",
+      "grokLoginRetry": "再ダウンロードして Grok でログイン"
+    },
+    "grok": {
+      "title": "アプリ内チャット · Grok アカウント",
+      "description": "アプリ内のチャットで Grok をアシスタントとして使います。Grok は Carrot のツールでライブラリを読み、翻訳・編集します。このページの外部 AI アプリ接続（MCP）とは別で、ログインと認証情報は公式の Grok Build が管理します。",
+      "checking": "アカウントを確認しています…",
+      "signedOut": "ログインしていません",
+      "connected": "Grok に接続済み",
+      "connectedVersion": "Grok に接続済み · Grok Build {{version}}",
+      "login": "Grok でログイン",
+      "logout": "ログアウト",
+      "refresh": "更新",
+      "error": "Grok の接続を確認してください。"
     }
   },
   "pageBlocks": {
@@ -2637,6 +2665,7 @@
         "environment-restore": "環境の復元",
         "model-test": "モデル確認",
         "codex-auth": "ChatGPTアカウント",
+        "grok-auth": "Grok Build",
         "sound-effect-translation": "効果音翻訳",
         "claude-auth": "Claude Code"
       },
@@ -3263,6 +3292,14 @@
     "runtime": "AI",
     "claudeLoginHint": "Claude アカウントでログインしてください。",
     "claudeLogin": "Claude でログイン",
+    "claudeDownloadLogin": "ダウンロードして Claude でログイン",
+    "claudeDownloadLoginRetry": "再ダウンロードして Claude でログイン",
+    "grokLogin": "Grok でログイン",
+    "grokDownloadLogin": "ダウンロードして Grok でログイン",
+    "grokDownloadLoginRetry": "再ダウンロードして Grok でログイン",
+    "grokLoginHint": "Grok にログインするとチャットを開始できます。",
+    "downloadLogin": "ダウンロードして ChatGPT にログイン",
+    "downloadLoginRetry": "再ダウンロードして ChatGPT にログイン",
     "moreImages": "画像をあと{{count}}件表示"
   }
 }

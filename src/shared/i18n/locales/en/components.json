@@ -2562,6 +2562,34 @@
       "effort": "Reasoning effort",
       "error": "Check your Claude connection.",
       "testing": "Checking Claude Code connection and model response."
+    },
+    "accountRuntime": {
+      "missingTitle": "The {{name}} runtime isn't installed yet",
+      "missingDetail": "The first time you connect, the official {{name}} runtime is downloaded once and kept on this PC. Later connections and tasks reuse the stored copy.",
+      "downloading": "Downloading…",
+      "downloadFailed": "Couldn't download the {{name}} runtime",
+      "connectFailed": "Couldn't finish connecting {{name}}",
+      "retryHint": "Press the same button again to retry.",
+      "claudeLogin": "Download and sign in",
+      "claudeLoginRetry": "Retry download and sign in",
+      "claudeConsole": "Download and connect API account",
+      "claudeConsoleRetry": "Retry download and connect API account",
+      "codexLogin": "Download and sign in with ChatGPT",
+      "codexLoginRetry": "Retry download and sign in with ChatGPT",
+      "grokLogin": "Download and sign in to Grok",
+      "grokLoginRetry": "Retry download and sign in to Grok"
+    },
+    "grok": {
+      "title": "App chat · Grok account",
+      "description": "Use Grok as an assistant in the in-app chat. Grok reads, translates and edits your library through Carrot's tools. This is separate from the external AI app (MCP) connections on this page; the official Grok Build manages sign-in and credentials.",
+      "checking": "Checking account…",
+      "signedOut": "Not signed in",
+      "connected": "Grok connected",
+      "connectedVersion": "Grok connected · Grok Build {{version}}",
+      "login": "Sign in to Grok",
+      "logout": "Sign out",
+      "refresh": "Refresh",
+      "error": "Check your Grok connection."
     }
   },
   "pageBlocks": {
@@ -2637,6 +2665,7 @@
         "environment-restore": "Environment restore",
         "model-test": "Model check",
         "codex-auth": "ChatGPT account",
+        "grok-auth": "Grok Build",
         "sound-effect-translation": "Sound effect translation",
         "claude-auth": "Claude Code"
       },
@@ -3263,6 +3292,14 @@
     "runtime": "Assistant",
     "claudeLoginHint": "Sign in to Claude to start chatting.",
     "claudeLogin": "Sign in to Claude",
+    "claudeDownloadLogin": "Download and sign in to Claude",
+    "claudeDownloadLoginRetry": "Retry download and sign in to Claude",
+    "grokLogin": "Sign in to Grok",
+    "grokDownloadLogin": "Download and sign in to Grok",
+    "grokDownloadLoginRetry": "Retry download and sign in to Grok",
+    "grokLoginHint": "Sign in to Grok to start chatting.",
+    "downloadLogin": "Download and sign in to ChatGPT",
+    "downloadLoginRetry": "Retry download and sign in to ChatGPT",
     "moreImages": "Show {{count}} more images"
   }
 }

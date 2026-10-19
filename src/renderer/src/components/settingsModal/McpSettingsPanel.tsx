@@ -8,6 +8,7 @@ import { mcpGateway } from "../../api/mcpGateway";
 import { Button } from "../ui/Button";
 import { CheckboxField } from "../ui/CheckboxField";
 import { CollapsibleSection, Section } from "../ui/Section";
+import { GrokAccountSection } from "./GrokAccountSection";
 import { useMcpSettings } from "./useMcpSettings";
 import { McpConnectionGuide, McpTailscaleGuide } from "./McpConnectionGuide";
 import styles from "./McpSettingsPanel.module.css";
@@ -31,6 +32,7 @@ export function McpSettingsView(props: Props): React.JSX.Element {
       <McpHelp {...props} />
       {status && <McpConnections {...props} status={status} />}
       {status && <McpPermissions {...props} status={status} />}
+      <GrokAccountSection />
     </div>
   );
 }

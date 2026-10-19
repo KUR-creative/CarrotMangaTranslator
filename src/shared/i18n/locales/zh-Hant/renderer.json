@@ -558,6 +558,7 @@
         "shareExport": "建立共享檔案",
         "modelTest": "檢查模型與執行環境",
         "codexAuth": "連接 ChatGPT 帳戶",
+        "grokAuth": "連接 Grok 帳戶",
         "background": "背景工作",
         "environmentBackup": "匯出備份",
         "environmentRestore": "匯入備份",
@@ -596,6 +597,7 @@
         "model-test-checking": "正在檢查模型回應…",
         "codex-auth-opening-browser": "正在開啟登入頁面…",
         "codex-auth-updating": "正在更新帳戶連接…",
+        "cli-downloading": "正在下載 AI 執行階段…",
         "waiting-for-user": "正在等待瀏覽器登入…"
       },
       "status": {

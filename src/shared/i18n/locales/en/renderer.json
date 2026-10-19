@@ -558,6 +558,7 @@
         "shareExport": "Create shared file",
         "modelTest": "Check model and runtime",
         "codexAuth": "Connect ChatGPT account",
+        "grokAuth": "Connect Grok account",
         "background": "Background task",
         "environmentBackup": "Export backup",
         "environmentRestore": "Import backup",
@@ -596,6 +597,7 @@
         "model-test-checking": "Checking the model response…",
         "codex-auth-opening-browser": "Opening the sign-in page…",
         "codex-auth-updating": "Updating the account connection…",
+        "cli-downloading": "Downloading the AI runtime…",
         "waiting-for-user": "Waiting for browser sign-in…"
       },
       "status": {
