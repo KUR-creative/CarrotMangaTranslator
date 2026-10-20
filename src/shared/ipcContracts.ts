@@ -32,6 +32,7 @@ import { ipcEventContracts } from "./ipcEventContracts";
 import { webImportIpcContracts } from "./ipcWebImportContracts";
 import { blockLibraryIpcContracts } from "./ipcBlockLibraryContracts";
 import { conditionalBatchIpcContracts } from "./ipcConditionalBatchContracts";
+import { workGlossaryIpcContracts } from "./ipcWorkGlossaryContracts";
 import { linkedWorkspaceIpcContracts } from "./ipcLinkedWorkspaceContracts";
 import { appOperationIpcContracts } from "./ipcAppOperationContracts";
 
@@ -70,6 +71,7 @@ export const ipcInvokeContracts = {
   ...libraryIpcContracts,
   ...chapterPageIpcContracts,
   ...workContextIpcContracts,
+  ...workGlossaryIpcContracts,
   ...textReviewIpcContracts,
   ...fontIpcContracts,
   ...settingsIpcContracts,

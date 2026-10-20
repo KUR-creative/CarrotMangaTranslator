@@ -566,7 +566,7 @@ describe("production cleanup coverage floor gate", () => {
     expect(Object.keys(manifest.floors)).toEqual(scope.existing);
     expect(Object.keys(manifest.introducedFloors)).toEqual(scope.added);
     expect(manifest.deletedFiles).toEqual(scope.deleted);
-    expect(scope.existing).toHaveLength(857);
+    expect(scope.existing).toHaveLength(859);
     // Includes global chat, shared actions, OpenCode help, MCP event streams, shared
     // translation instructions and image budget; inherited floors remain unchanged.
     // inherited floors remain unchanged.
@@ -581,7 +581,8 @@ describe("production cleanup coverage floor gate", () => {
     // Sampled retouch adds worker, raster, gesture and shared contract owners.
     // Grok web and Build share a dedicated MCP connection guide.
     // Text exchange adds its file codec and renderer review importer.
-    expect(scope.added).toHaveLength(1520);
+    // Issue #156 adds chapter selection/deletion and glossary file exchange owners.
+    expect(scope.added).toHaveLength(1537);
     expect(scope.deleted).toHaveLength(12);
   });
 });

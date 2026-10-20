@@ -160,9 +160,7 @@ it("approves the selected comparison code through the app, without a password fi
   expect(resolveMcpPairing).not.toHaveBeenCalled();
   expect(screen.getByText("요청 권한: 보관함·텍스트·문맥 조회")).toBeTruthy();
   expect(document.querySelector('input[type="password"]')).toBeNull();
-  fireEvent.click(
-    screen.getByRole("button", { name: "같은 코드 확인 · 승인" }),
-  );
+  fireEvent.click(screen.getByRole("button", { name: "코드 확인 · 승인" }));
   await waitFor(() =>
     expect(resolveMcpPairing).toHaveBeenCalledWith("a".repeat(43), true),
   );
@@ -332,7 +330,7 @@ it("renders human-readable permissions and preserves unrecognized scope text saf
   expect(document.querySelector("img")).toBeNull();
   expect(screen.queryByText(/외부 AI로 처리하면/)).toBeNull();
   expect(
-    screen.getByText(/보관함 전체의 텍스트·문맥 조회와 텍스트 파일 출력/),
+    screen.getByText(/보관함 텍스트·문맥 조회와 텍스트 파일 출력/),
   ).toBeTruthy();
   expect(
     screen.getByRole("checkbox", {
@@ -495,13 +493,11 @@ it("shows all first-use options checked and receives requests online without an 
   expect(options).toHaveLength(4);
   expect(options.every((option) => option.checked)).toBe(true);
   expect(screen.queryByRole("button", { name: /새 연결 허용/ })).toBeNull();
-  expect(
-    screen.getByText(/위 연결 방법에서 사용할 AI 앱을 선택하세요/),
-  ).toBeTruthy();
+  expect(screen.getByText(/연결 방법에서 앱을 선택하세요/)).toBeTruthy();
   view.unmount();
   show({ ...current, state: "off" });
   expect(screen.queryByText(/새 연결 요청을 항상 받습니다/)).toBeNull();
-  expect(screen.getByText(/MCP를 켜고 사용할 AI 앱을 연결하세요/)).toBeTruthy();
+  expect(screen.getByText(/MCP를 켜세요/)).toBeTruthy();
 });
 
 it("hides historical revoked grants and removes a newly revoked connection after the action refresh", async () => {
@@ -540,10 +536,10 @@ it("hides historical revoked grants and removes a newly revoked connection after
   fireEvent.click(disconnect);
   await waitFor(() => expect(screen.queryByText("Current ChatGPT")).toBeNull());
   expect(revokeMcpConnection).toHaveBeenCalledWith("active");
-  expect(screen.getByText(/아직 연결된 앱이 없습니다/)).toBeTruthy();
+  expect(screen.getByText(/연결된 앱이 없습니다/)).toBeTruthy();
   first.unmount();
   render(<McpSettingsPanel />);
-  await screen.findByText(/아직 연결된 앱이 없습니다/);
+  await screen.findByText(/연결된 앱이 없습니다/);
   expect(screen.queryByRole("button", { name: /연결 해제/ })).toBeNull();
 });
 

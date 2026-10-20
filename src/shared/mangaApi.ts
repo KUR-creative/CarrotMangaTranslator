@@ -44,11 +44,14 @@ import type {
   ChapterPageMetadata,
   ChapterPagesPatch,
   CustomFont,
+  DeleteChaptersRequest,
+  DeleteChaptersResult,
   FontLibrarySnapshot,
   FontPreferences,
   LibraryIndex,
 } from "./libraryTypes";
 import type { PanelCommand, PanelId, PanelSyncState } from "./panelBridgeTypes";
+import type { WorkGlossaryFileOpenResult } from "./workGlossaryFile";
 import type {
   PrepareSoundEffectTranslationRequest,
   PrepareSoundEffectTranslationResult,
@@ -378,6 +381,11 @@ export interface MangaApi extends McpApi, ChatApi, ClaudeApi, GrokApi {
     request: ResetWorkContextRequest,
   ) => Promise<ResetWorkContextResult>;
   getWorkContextUsage: (workId: string) => Promise<WorkContextUsage>;
+  openWorkGlossaryFile: () => Promise<WorkGlossaryFileOpenResult>;
+  saveWorkGlossaryFile: (request: {
+    defaultName: string;
+    content: string;
+  }) => Promise<{ saved: true; path: string } | null>;
   researchWorkContext: (
     request: ResearchWorkContextRequest,
   ) => Promise<WorkContextResearchProposal>;
@@ -409,6 +417,9 @@ export interface MangaApi extends McpApi, ChatApi, ClaudeApi, GrokApi {
     chapterId: string,
     removeCustomOutputs?: boolean,
   ) => Promise<LibraryIndex>;
+  deleteChapters: (
+    request: DeleteChaptersRequest,
+  ) => Promise<DeleteChaptersResult>;
   reorderChapters: (
     workId: string,
     chapterIds: string[],

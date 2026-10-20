@@ -5,7 +5,6 @@ import { grokConnection } from "../../api/grokConnection";
 import { grokGateway } from "../../api/grokGateway";
 import type { AccountConnectStage } from "../../lib/accountRuntimePresentation";
 import { Button } from "../ui/Button";
-import { Section } from "../ui/Section";
 import { AccountRuntimeSetup } from "./AccountRuntimeSetup";
 import { useCliAccountActions } from "./useCliAccountActions";
 import styles from "./McpSettingsPanel.module.css";
@@ -20,7 +19,7 @@ const LOGIN_LABELS: Record<AccountConnectStage, string> = {
 
 /**
  * Grok account for the in-app chat assistant. Grok Build owns sign-in and
- * credentials; external MCP connectors on the same page are separate.
+ * credentials; account management is opened from the chat provider.
  */
 export function GrokAccountSection(): React.JSX.Element {
   const { t } = useTranslation("components");
@@ -35,13 +34,7 @@ export function GrokAccountSection(): React.JSX.Element {
   const { account, operation } = controller;
   const authenticated = account?.authenticated === true;
   return (
-    <Section
-      title={t("settings.grok.title")}
-      description={t("settings.grok.description")}
-      density="compact"
-      divided
-      bodyClassName={styles.body}
-    >
+    <section aria-label={t("settings.grok.title")} className={styles.body}>
       <p
         className={styles.status}
         data-state={authenticated ? "online" : undefined}
@@ -82,7 +75,7 @@ export function GrokAccountSection(): React.JSX.Element {
           {controller.otherError}
         </p>
       )}
-    </Section>
+    </section>
   );
 }
 

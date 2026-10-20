@@ -117,7 +117,29 @@ beforeEach(async () => {
 });
 afterEach(cleanup);
 
-describe("Grok app-chat account in settings", () => {
+describe("Grok app-chat account management", () => {
+  it("shows loading, a versionless account and a recoverable refresh error", async () => {
+    const pending = deferred<GrokAccount>();
+    const read = vi
+      .fn<MangaApi["getGrokAccount"]>()
+      .mockReturnValueOnce(pending.promise);
+    installBridge({ getGrokAccount: read });
+    grokConnection.publish(null);
+    render(<GrokAccountSection />);
+    expect(screen.getByText("계정 상태 확인 중…")).toBeTruthy();
+    await act(async () => pending.resolve({ ...grokConnected, version: "" }));
+    expect(await screen.findByText("Grok 연결됨")).toBeTruthy();
+    read.mockRejectedValueOnce(new Error("refresh unavailable"));
+    fireEvent.click(screen.getByRole("button", { name: "새로고침" }));
+    expect(await screen.findByRole("alert")).toBeTruthy();
+    read.mockResolvedValue(grokMissing);
+    fireEvent.click(screen.getByRole("button", { name: "새로고침" }));
+    await waitFor(() => expect(screen.queryByRole("alert")).toBeNull());
+    expect(
+      screen.getByRole("button", { name: "내려받고 Grok 로그인" }),
+    ).toBeTruthy();
+  });
+
   it("downloads Grok Build on first sign-in with shared progress, cancel and retry, then connects and signs out", async () => {
     const first = deferred<GrokAccount>();
     const login = vi
@@ -138,9 +160,9 @@ describe("Grok app-chat account in settings", () => {
     render(<GrokAccountSection />);
 
     expect(
-      screen.getByRole("heading", { name: "앱 채팅 · Grok 계정" }),
+      screen.getByRole("region", { name: "앱 채팅 · Grok 계정" }),
     ).toBeTruthy();
-    expect(screen.getByText(/외부 AI 앱 연결\(MCP\)과는 별개/)).toBeTruthy();
+    expect(screen.queryByText(/외부 AI 앱 연결\(MCP\)과는 별개/)).toBeNull();
     expect(
       screen.getByText("Grok Build 실행 파일이 아직 없습니다"),
     ).toBeTruthy();
